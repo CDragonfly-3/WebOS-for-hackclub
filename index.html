@@ -43,50 +43,71 @@
 
   <body>
     <div class="page">
-      <div class="box">
+      <div class="box" style="border: solid; border-color:black">
+        <h1 style="text-align: center; font-size: 100px;">This is ShiteOS™</h1>
+        <span style="font-size: 10px;">(Not actually trademarked)</span>
+        <br><br><br><br><br>
         <h2>This is my first project and this WebOS is modeled around me and my life in some ways so enjoy I suppose :)</h2>
         <!-- <h3>To read the intro (about ME), just scroll down bro or if you want to skip the intro and go straigh to the OS, click <a href="#">here</a></h3> -->
         <h4>(So far it is a work in progress but I might have a fully functional OS!)</h4>
-        <img src="./images/shiteos.png" alt="Happy lil guy">
+        <div style="text-align: center;">
+          <img src="./images/shiteos.png" style="width: 500px;"alt="Happy lil guy">
+        </div>
       </div>
 
-      <div class="box">
-        <ul>
-          <li><a href="https://youtube.com/">Here is a link to YouTube because I like yt idk.</a></li>
-          <li><a href="https://music.youtube.com/playlist?list=PLOmWrguyraJ0">This is a link to maybe my fav music playlist. Have a listen!</a></li>
-          <li><a href="https://music.youtube.com/">Here is just yt music in general because i like that place. Idk why I dont use spotify but yt music is still awesome!</a></li>
-        </ul>
-      </div>
-
-      <div class="box">
-        <span style="font-size: 30px;">About me:</span>
+      <div class="box" style="border: solid; border-color:gold">
+        <span style="font-size: 50px;">About me:</span>
         <br>
         (I don't want to reveal that much information about myself because that's dangerous and whatnot)
 
         <p style="font-size: 20px;">My name is Connor and I am 13 years old, I'm from the UK and I am building this WebOS for the Stardance event on hackclub.com (which is very likely how you got here).</p>
         <p style="font-size: 20px;">I have lots of interests and hobbies. Here is a list of them (not in any particular order):</p>
-        <ol>
+        <ul>
           <li>Coding</li>
           <li>Basically all STEM things to be honest</li>
           <li>Gaming</li>
           <li>Art</li>
-          <li>ROCK CLIMBING!!!!!</li>
-        </ol>
-      </div>
-
-      <div class="box">
-        <p style="font-size: 20px;">Fun facts!</p>
+          <li>ROCK CLIMBING!!!!! (I'm not <i>that</i> good - my hardest as of writing this is only V4 :/ but I'm getting better!)</li>
+          <li>Chess (I'm not <i>that</i> good at this either - I'm like 600 elo but I think I deserve at least 800 or 1000 but if I just play more games, I'm sure I can get there!)</li>
+          <li>To be honest, I just like boardgames and things like that a lot just in general.</li>
+        </ul>
+      
+        <span style="font-size: 30px;">Notable links:</span>
+        <ul>
+          <li><a href="https://youtube.com/">Here is a link to YouTube because I like yt idk.</a></li>
+          <li><a href="https://music.youtube.com/playlist?list=PLOmWrguyraJ0">This is a link to maybe my fav music playlist. Have a listen!</a></li>
+          <li><a href="https://music.youtube.com/">Here is just yt music in general because i like that place. Idk why I dont use spotify but yt music is still awesome!</a></li>
+        </ul>
+      
+        <span style="font-size: 30px;">Fun facts!</span>
         <ul>
           <li>I have two dogs,one is a tan and dark grey yorkie called Rosie and the other is a black cavapoo named Muffin. </li>
           <li>I have one twin brother (I won't say his name for obvious reasons)</li>
-          <li>My favorite color is <a style="color:maroon;"><strong>maroon</strong></a></li>
+          <li>My favorite color is <span style="color:maroon;"><strong>maroon</strong></span> and my second favorite is <span style="color: cyan;"><strong>cyan</strong></span></li>
           <!-- Maybe add more fun facts later idk.-->
         </ul>
-      </div>
-
-      <div class="box">
-        [PLACEHOLDER FOR MORE STUFF]
+      
+        [INSERT MORE STUFF HERE]
       </div>
     </div>
+
+    <div style="position: fixed; bottom: 0; left: 0; right: 0; box-sizing: border-box; display: flex; justify-content: space-between; backdrop-filter: blur(15px); background-color:#111111b8; padding: 10px; color: white;">
+      <span style="font-weight: 1000; background-color: #44444488; padding: 4px 12px; border-radius: 100px;">
+        ShiteOS
+      </span>
+      <span id="timeElement" style="font-weight: 500; background-color: #44444488; padding: 4px 12px; border-radius: 100px;">
+        [DATE] [TIME]
+      </span>
+    </div>
+    <script>
+      function updateTime() {
+        
+        var TimeRnFrFr = new Date().toLocaleString();
+        var WordsOfTime = document.querySelector("#timeElement");
+        WordsOfTime.innerHTML = TimeRnFrFr;
+      }
+      setInterval(updateTime, 1000);
+    </script>
+    <!-- idk what to put here rn -->
   </body>
 </html>
