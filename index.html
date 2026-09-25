@@ -11,18 +11,26 @@
         background-size: cover;
       }
 
-      .page {
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-
-      .box {
+      .window {
         background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(0, 0, 0, 0.08);
+        border: solid;
+        border-color: #111;
         border-radius: 20px;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-        padding: 20px 25px;
-        margin: 20px 0;
+        margin: 0;
+      }
+
+      .windowheader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: move;
+        background-color: #111;
+        color: white;
+        padding: 10px;
+        border-radius: 19px 19px 0 0;
+        font-weight: 1000;
+        margin: -1px -1px 0;
       }
 
       h2, h4 {
@@ -42,20 +50,32 @@
   </head>
 
   <body>
-    <div class="page">
-      <div class="box" style="border: solid; border-color:black">
+    <div id="welcome" class="window" style="position: absolute; top: 100px; left: 100px;">
+
+    <div id="welcomeheader" class="windowheader" style="display: flex; justify-content: flex-end;">
+        <span style="cursor: pointer;" id="welcomeclose">X</span>
+    </div>
+
+    <div style="padding: 20px 25px;">
         <h1 style="text-align: center; font-size: 100px;">This is ShiteOS™</h1>
         <span style="font-size: 10px;">(Not actually trademarked)</span>
         <br><br><br><br><br>
         <h2>This is my first project and this WebOS is modeled around me and my life in some ways so enjoy I suppose :)</h2>
-        <!-- <h3>To read the intro (about ME), just scroll down bro or if you want to skip the intro and go straigh to the OS, click <a href="#">here</a></h3> -->
-        <h4>(So far it is a work in progress but I might have a fully functional OS!)</h4>
-        <div style="text-align: center;">
-          <img src="./images/shiteos.png" style="width: 500px;"alt="Happy lil guy">
-        </div>
-      </div>
+        <!-- <div style="text-align: center;">
+        <img src="./images/shiteos.png" style="width: 500px;"alt="Happy lil guy">
+        </div> -->
+    </div>
 
-      <div class="box" style="border: solid; border-color:gold">
+</div>
+    
+
+    <div id="info" class="window" style="position: absolute; top: 300px; left: 200px;">
+
+    <div id="infoheader" class="windowheader" style="display: flex; justify-content: flex-end;">
+        <span style="cursor: pointer;" id="infoclose">X</span>
+    </div>
+
+    <div style="padding: 20px 25px;">
         <span style="font-size: 50px;">About me:</span>
         <br>
         (I don't want to reveal that much information about myself because that's dangerous and whatnot)
@@ -71,14 +91,14 @@
           <li>Chess (I'm not <i>that</i> good at this either - I'm like 600 elo but I think I deserve at least 800 or 1000 but if I just play more games, I'm sure I can get there!)</li>
           <li>To be honest, I just like boardgames and things like that a lot just in general.</li>
         </ul>
-      
+
         <span style="font-size: 30px;">Notable links:</span>
         <ul>
           <li><a href="https://youtube.com/">Here is a link to YouTube because I like yt idk.</a></li>
           <li><a href="https://music.youtube.com/playlist?list=PLOmWrguyraJ0">This is a link to maybe my fav music playlist. Have a listen!</a></li>
           <li><a href="https://music.youtube.com/">Here is just yt music in general because i like that place. Idk why I dont use spotify but yt music is still awesome!</a></li>
         </ul>
-      
+
         <span style="font-size: 30px;">Fun facts!</span>
         <ul>
           <li>I have two dogs,one is a tan and dark grey yorkie called Rosie and the other is a black cavapoo named Muffin. </li>
@@ -86,7 +106,7 @@
           <li>My favorite color is <span style="color:maroon;"><strong>maroon</strong></span> and my second favorite is <span style="color: cyan;"><strong>cyan</strong></span></li>
           <!-- Maybe add more fun facts later idk.-->
         </ul>
-      
+
         [INSERT MORE STUFF HERE]
       </div>
     </div>
@@ -95,19 +115,22 @@
       <span style="font-weight: 1000; background-color: #44444488; padding: 4px 12px; border-radius: 100px;">
         ShiteOS
       </span>
+
+      <div id="welcomeopen" style="cursor: pointer;">
+        <span style="font-weight: 750">Open the welcome page</span>
+      </div>
+
+      <div id="infoopen" style="cursor: pointer;">
+        <span style="font-weight: 750">Open the About Me page</span>
+      </div>
+
       <span id="timeElement" style="font-weight: 500; background-color: #44444488; padding: 4px 12px; border-radius: 100px;">
         [DATE] [TIME]
       </span>
     </div>
-    <script>
-      function updateTime() {
-        
-        var TimeRnFrFr = new Date().toLocaleString();
-        var WordsOfTime = document.querySelector("#timeElement");
-        WordsOfTime.innerHTML = TimeRnFrFr;
-      }
-      setInterval(updateTime, 1000);
-    </script>
-    <!-- idk what to put here rn -->
+    <script src="script.js"></script>
+    <div id="desktopApps" style="padding-top: 64px; padding-left: 16px;">
+      <p>App for typing or smt type shi</p>
+    </div>
   </body>
 </html>
