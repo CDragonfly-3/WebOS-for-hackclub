@@ -60,7 +60,7 @@ function dragElement(element) {
 // Make both windows draggable
 dragElement(document.getElementById("welcome"));
 dragElement(document.getElementById("info"));
-
+dragElement(document.getElementById("notes"));
 
 // --------------------------------------------------
 // OPEN / CLOSE
@@ -68,6 +68,35 @@ dragElement(document.getElementById("info"));
 
 var welcomeScreen = document.getElementById("welcome");
 var aboutmeScreen = document.getElementById("info");
+var notesScreen = document.getElementById("notes");
+var welcomePagesToggle = document.getElementById("welcome-pages-toggle");
+var welcomePagesMenu = document.getElementById("welcome-pages-menu");
+
+function setWelcomePagesOpen(isOpen) {
+    welcomePagesToggle.setAttribute("aria-expanded", String(isOpen));
+    welcomePagesMenu.hidden = !isOpen;
+}
+
+welcomePagesToggle.addEventListener("click", function() {
+    setWelcomePagesOpen(welcomePagesMenu.hidden);
+});
+
+welcomePagesMenu.addEventListener("click", function() {
+    setWelcomePagesOpen(false);
+});
+
+document.addEventListener("click", function(event) {
+    if (!event.target.closest(".welcome-pages")) {
+        setWelcomePagesOpen(false);
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape" && !welcomePagesMenu.hidden) {
+        setWelcomePagesOpen(false);
+        welcomePagesToggle.focus();
+    }
+});
 
 function closeWindow(element) {
     element.style.display = "none";
@@ -96,3 +125,57 @@ document.getElementById("infoclose").addEventListener("click", function() {
 document.getElementById("infoopen").addEventListener("click", function() {
     openWindow(aboutmeScreen);
 });
+
+document.getElementById("notesclose").addEventListener("click", function() {
+    closeWindow(notesScreen);
+    deselectIcon(document.querySelector("#notesopen .app"));
+});
+
+var selectedIcon = undefined
+
+function selectIcon(element) {
+  element.classList.add("selected");
+  selectedIcon = element
+}
+
+function deselectIcon(element) {
+  element.classList.remove("selected");
+  selectedIcon = undefined
+}
+
+function handleIconTap(element) {
+  if (element.classList.contains("selected")) {
+    deselectIcon(element);
+    closeWindow(notesScreen);
+  } else {
+    selectIcon(element);
+    openWindow(notesScreen);
+  }
+}
+
+document.querySelector("#notesopen .app").addEventListener("click", function() {
+    handleIconTap(this);
+});
+
+var biggestIndex = 1;
+
+// Bring a window to the front when clicked
+function addWindowTapHandling(element) {
+
+  element.addEventListener("mousedown", () => {
+    handleWindowTap(element);
+  });
+
+}
+
+function handleWindowTap(element) {
+
+  biggestIndex++;
+
+  element.style.zIndex = biggestIndex;
+
+}
+
+addWindowTapHandling(welcomeScreen);
+addWindowTapHandling(aboutmeScreen);
+addWindowTapHandling(notesScreen);

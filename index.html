@@ -4,7 +4,6 @@
     <style>
       body {
         margin: 0;
-        padding: 30px 20px;
         font-family: Arial, sans-serif;
         background-image: url('./images/coolgif.gif');
         background-attachment: fixed;
@@ -12,12 +11,14 @@
       }
 
       .window {
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 1);
         border: solid;
         border-color: #111;
         border-radius: 20px;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         margin: 0;
+        width: 1250px;
+        position: absolute;
       }
 
       .windowheader {
@@ -33,6 +34,24 @@
         margin: -1px -1px 0;
       }
 
+      .selected {
+        background-color:rgba(128, 255, 0, 0.3);
+        padding: 8px 8px 0px 8px;
+        border-radius: 12px;
+      }
+
+      .app {
+        display: inline-block;
+        margin-right: 16px;
+        cursor: pointer;
+        padding: 8px 8px 0px 8px;
+      }
+
+      .app:hover {
+        background-color:rgba(128, 255, 0, 0.3);
+        border-radius: 12px;
+      }
+
       h2, h4 {
         margin-top: 0;
       }
@@ -46,41 +65,91 @@
       a {
         color: #111;
       }
+
+      .welcome-pages {
+        position: relative;
+      }
+
+      .bottom-bar-button,
+      .welcome-page-link {
+        border: 0;
+        color: white;
+        font: inherit;
+        font-weight: 750;
+        cursor: pointer;
+      }
+
+      .bottom-bar-button {
+        background-color: #44444488;
+        padding: 4px 12px;
+        border-radius: 100px;
+      }
+
+      .bottom-bar-button:hover,
+      .welcome-page-link:hover {
+        background-color: #666;
+      }
+
+      .welcome-pages-menu {
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 0;
+        min-width: max-content;
+        padding: 6px;
+        border-radius: 8px;
+        background-color: #222;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .welcome-page-link {
+        display: block;
+        width: 100%;
+        padding: 8px 12px;
+        border-radius: 5px;
+        background: transparent;
+        text-align: left;
+      }
     </style>
   </head>
 
   <body>
-    <div id="welcome" class="window" style="position: absolute; top: 100px; left: 100px;">
+    <div id="welcome" class="window" style="top: 25px; left: 150px;">
 
-    <div id="welcomeheader" class="windowheader" style="display: flex; justify-content: flex-end;">
-        <span style="cursor: pointer;" id="welcomeclose">X</span>
+      <div id="top">
+        <div id="welcomeheader" class="windowheader">
+          <span>This is ShiteOS</span>
+          <span style="cursor: pointer;" id="welcomeclose">X</span>
+        </div>
+      </div>
+
+      <div style="padding: 20px 25px;">
+          <h1 style="text-align: center; font-size: 100px;">This is ShiteOS™</h1>
+          <span style="font-size: 10px;">(Not actually trademarked)</span>
+          <br><br><br><br><br>
+          <h2>This is my first project and this WebOS is probably complete shite! (hence the name)</h2>
+          <!-- <div style="text-align: center;">
+          <img src="./images/shiteos.png" style="width: 500px;"alt="Happy lil guy">
+          </div> -->
+      </div>
+
     </div>
-
-    <div style="padding: 20px 25px;">
-        <h1 style="text-align: center; font-size: 100px;">This is ShiteOS™</h1>
-        <span style="font-size: 10px;">(Not actually trademarked)</span>
-        <br><br><br><br><br>
-        <h2>This is my first project and this WebOS is modeled around me and my life in some ways so enjoy I suppose :)</h2>
-        <!-- <div style="text-align: center;">
-        <img src="./images/shiteos.png" style="width: 500px;"alt="Happy lil guy">
-        </div> -->
-    </div>
-
-</div>
     
 
-    <div id="info" class="window" style="position: absolute; top: 300px; left: 200px;">
+    <div id="info" class="window" style="top: 500px; left: 150px;">
 
-    <div id="infoheader" class="windowheader" style="display: flex; justify-content: flex-end;">
-        <span style="cursor: pointer;" id="infoclose">X</span>
-    </div>
+      <div id="top">
+        <div id="infoheader" class="windowheader">
+          <span>About me</span>
+          <span style="cursor: pointer;" id="infoclose">X</span>
+        </div>
+      </div>
 
-    <div style="padding: 20px 25px;">
+      <div style="padding: 20px 25px;">
         <span style="font-size: 50px;">About me:</span>
         <br>
         (I don't want to reveal that much information about myself because that's dangerous and whatnot)
 
-        <p style="font-size: 20px;">My name is Connor and I am 13 years old, I'm from the UK and I am building this WebOS for the Stardance event on hackclub.com (which is very likely how you got here).</p>
+        <p style="font-size: 20px;">My name is Connor and I am 13 years old, I'm from the UK and I am building this WebOS for the Stardance event on <a href="https://hackclub.com">hackclub.com</a> (which is very likely how you got here).</p>
         <p style="font-size: 20px;">I have lots of interests and hobbies. Here is a list of them (not in any particular order):</p>
         <ul>
           <li>Coding</li>
@@ -111,26 +180,42 @@
       </div>
     </div>
 
-    <div style="position: fixed; bottom: 0; left: 0; right: 0; box-sizing: border-box; display: flex; justify-content: space-between; backdrop-filter: blur(15px); background-color:#111111b8; padding: 10px; color: white;">
+    <div style="position: fixed; bottom: 0; left: 0; right: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(15px); background-color:#111111b8; padding: 10px; color: white; z-index: 10000">
       <span style="font-weight: 1000; background-color: #44444488; padding: 4px 12px; border-radius: 100px;">
         ShiteOS
       </span>
 
-      <div id="welcomeopen" style="cursor: pointer;">
-        <span style="font-weight: 750">Open the welcome page</span>
+      <div class="welcome-pages">
+        <button id="welcome-pages-toggle" class="bottom-bar-button" type="button" aria-expanded="false" aria-controls="welcome-pages-menu">
+          Welcome Pages ^
+
+        </button>
+        <div id="welcome-pages-menu" class="welcome-pages-menu" hidden>
+          <button id="welcomeopen" class="welcome-page-link" type="button">Open the welcome page</button>
+          <button id="infoopen" class="welcome-page-link" type="button">Open the About Me page</button>
+        </div>
       </div>
 
-      <div id="infoopen" style="cursor: pointer;">
-        <span style="font-weight: 750">Open the About Me page</span>
-      </div>
-
-      <span id="timeElement" style="font-weight: 500; background-color: #44444488; padding: 4px 12px; border-radius: 100px;">
+      <span id="timeElement" style="font-weight: 750; background-color: #44444488; padding: 4px 12px; border-radius: 100px;">
         [DATE] [TIME]
       </span>
     </div>
-    <script src="script.js"></script>
-    <div id="desktopApps" style="padding-top: 64px; padding-left: 16px;">
-      <p>App for typing or smt type shi</p>
+
+    <div id="notesopen" style="padding-top: 16px; padding-left: 16px;">
+      <div class="app">
+        <img src="./images/notepad.jpeg" alt="Notepad" style="width: 64px; height: 64px;">
+        <p style="text-align: center;">Notes</p>
+      </div>
     </div>
+    <div class="window" style="height: 400px; top: 150px; left: 150px; display: none;" id="notes">
+      <div id="top">
+        <div class="windowheader" id="notesheader">
+            <span>Notes</span>
+            <span style="cursor: pointer;" id="notesclose">X</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
