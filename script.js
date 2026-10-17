@@ -69,6 +69,7 @@ dragElement(document.getElementById("notes"));
 var welcomeScreen = document.getElementById("welcome");
 var aboutmeScreen = document.getElementById("info");
 var notesScreen = document.getElementById("notes");
+var notesMessage = document.getElementById("notesmessage");
 var welcomePagesToggle = document.getElementById("welcome-pages-toggle");
 var welcomePagesMenu = document.getElementById("welcome-pages-menu");
 
@@ -103,7 +104,7 @@ function closeWindow(element) {
 }
 
 function openWindow(element) {
-    element.style.display = "block";
+    element.style.display = "flex";
 }
 
 
@@ -126,10 +127,17 @@ document.getElementById("infoopen").addEventListener("click", function() {
     openWindow(aboutmeScreen);
 });
 
+// Notes window
 document.getElementById("notesclose").addEventListener("click", function() {
     closeWindow(notesScreen);
     deselectIcon(document.querySelector("#notesopen .app"));
 });
+
+
+document.getElementById("notesmessageclose").addEventListener("click", function() {
+    closeWindow(notesMessage);
+});
+
 
 var selectedIcon = undefined
 
@@ -179,3 +187,300 @@ function handleWindowTap(element) {
 addWindowTapHandling(welcomeScreen);
 addWindowTapHandling(aboutmeScreen);
 addWindowTapHandling(notesScreen);
+
+var content = [
+    {
+        title: "All my notes (a collection of every note, organized and updated)",
+        date: "Some date fr",
+        content: `
+            <div class="notescontent">
+                <span><strong style="font-size: 75px;">MY NOTES:</strong></span>
+                <p><u style="font-size: 24px;">To Do:</u></p>
+                <ul>
+                    <li><s>Make it so there two different tabs, one that displays my notes, and one that the user can type in (the text saying 'MY NOTES' is just a placeholder pretty much for what will be a tab on this window)</s></li>
+                    <li>Make it so the user can write their notes - whatever they want - and they will be saved for next time</li>
+                    <s><li>Make it so you can scroll on the notes page</li></s>
+                    <li><s>Make it so that windows can be freely resized</s></li>
+                    <li>Make it so that the user can customize the background of the WebOS (maybe even make it so they can upload their own image) or that they can choose the colour of the background of a window, the outline of a window, etc...</li>
+                    <li><s>Make it so that the notes message thing doesn't get affected by the sidebar and just sits at the top of the notes window</s> This point is irrelevant as I will no longer be doing it.</li>
+                    <li><s>Make it so that you can't drag a window outside of the screen</s> - ts is dumb because I dont think I can anyway</li>
+                    <li><s>Make it so that the WebOS has a fixed size so that when you drag a window down to the bottom of the screen, it doesn't create extra space that you can scroll down</s></li>
+                    <li>Make a calculator app</li>
+                    <li><s>FIX ISSUES - make no notes appear in the main area to begin with, only when you click on a tab in the sidebar(I'm lowk not doing this anymore), make the cursor different when hovering over an option in the sidebar, fix the issue that makes everything break  when I add another note</s></li>
+                </ul>
+                <br>
+                <p><u style="font-size: 24px;">Thoughts:</u></p>
+                <div style="margin-left: 16px">
+                    <li>After Stardance is over (which I'm doing this project for), I want to try other Hackclub programs and events like Phantom, Folktale, Terra, Crescent or Half Life or others. Because I do want to do so many though I probably won't have time to do or properly try all of them but It'll definitely be fun to do some. Check some of them out on <a href="https://hackclub.com/programs" style="color: blue">Hackclub</a>!</li>
+                    <li>I should probably start working on my To-Do list xD.</li>
+                    <li>Man ChatGPT is really useful.</li>
+                    <li>AHHHHHHHH I DON'T KNOW WHAT TO DOOOOOOOO. WHY'S THIS SO HARD. I DON'T KNOW WHAT TO DOOOOOOOO. I DON'T KNOW WHAT TO DOOOOOOOO. I DON'T KNOW WHAT TO DOOOOOOOO. I DON'T KNOW WHAT TO DOOOOOOOO. I DON'T KNOW WHAT TO DOOOOOOOO.</li>
+                    <li>Apologies for that last note, things just got a bit out of hand XD.</li>
+                    <li>Yippe I made this so much better :)</li>
+                    <li><s>Hmmmm what to do, what to do... I need an idea for an app for the final part of the tutorial but I'll make the calculator later becaise that's too basic I feel like and I need to do something STRONGER!</s> Nvm I'll do a calc it's lowk more complicated than it sounds I think.</li>
+                    <li>Wahoo we made the windows resizeable thanks to the one, the only, ChatGPT!!!</li>
+                    <li>Tommorow lets make the whole thing only 1 size and other random stuff maybe.</li>
+                    <li>I'm not making just any normal calculator. NO! I will make a proper calculator with pie, squares, ETC...!</li>
+                </div>
+            </div>
+        `
+    },
+    {
+    title: "My First Notes I'm Putting in this JS Thing",
+    date: "08/10/2026 - 13/10/2026",
+    content: `
+        <div class="notescontent">
+          <span><strong style="font-size: 75px;">MY NOTES:</strong></span>
+          <p><u style="font-size: 24px;">To Do:</u></p>
+          <ul>
+            <li>Make it so there two different tabs, one that displays my notes, and one that the user can type in (the text saying 'MY NOTES' is just a placeholder pretty much for what will be a tab on this window)</li>
+            <li>Make it so the user can write their notes - whatever they want - and they will be saved for next time</li>
+            <s><li>Make it so you can scroll on the notes page</li></s>
+            <li>Make it so that windows can be freely resized</li>
+            <li>Make it so that the user can customize the background of the WebOS (maybe even make it so they can upload their own image) or that they can choose the colour of the background of a window, the outline of a window, etc...</li>
+            <li><s>Make it so that the notes message thing doesn't get affected by the sidebar and just sits at the top of the notes window</s> This point is irrelevant as I will no longer be doing it.</li>
+            <li>Make it so that you can't drag a window outside of the screen</li>
+            <li>Make it so that the WebOS has a fixed size so that when you drag a window down to the bottom of the screen, it doesn't create extra space that you can scroll down</li>
+            <li>Make a calculator app</li>
+            <li>FIX ISSUES - make no notes appear in the main area to begin with, only when you click on a tab in the sidebar, make the cursor different when hovering over an option in the sidebar, fix the issue that makes everything break  when I add another note</li>
+          </ul>
+          <br>
+          <p><u style="font-size: 24px;">Thoughts:</u></p>
+          <div style="margin-left: 16px">
+            <li>After Stardance is over (which I'm doing this project for), I want to try other Hackclub programs and events like Phantom, Folktale, Terra, Crescent or Half Life or others. Because I do want to do so many though I probably won't have time to do or properly try all of them but It'll definitely be fun to do some. Check some of them out on <a href="https://hackclub.com/programs" style="color: blue">Hackclub</a>!</li>
+            <li>I should probably start working on my To-Do list xD.</li>
+            <li>Man ChatGPT is really useful.</li>
+            <li>AHHHHHHHH I DON'T KNOW WHAT TO DOOOOOOOO. WHY'S THIS SO HARD. I DON'T KNOW WHAT TO DOOOOOOOO. I DON'T KNOW WHAT TO DOOOOOOOO. I DON'T KNOW WHAT TO DOOOOOOOO. I DON'T KNOW WHAT TO DOOOOOOOO. I DON'T KNOW WHAT TO DOOOOOOOO.</li>
+            <li>Apologies for that last note, things just got a bit out of hand XD.</li>
+          </div>
+        </div>
+    `
+  },
+  {
+    title: "Finally fixed this so I can add more notes in this bit and not just putting everything in the same area",
+    date: "14/10/2026",
+    content: `
+        <div class="notescontent">
+            <s>fix the issue that makes everything break  when I add another note</s><br>
+            Yippe I made this so much better :)<br>
+            Make it so that when I add new notes they automatically filter into their respective places ont the page with all of my notes on and I don't have to manually type them in each section each time.<br>
+            <s>make the cursor different when hovering over an option in the sidebar</s><br>
+            Hmmmm what to do, what to do... I need an idea for an app for the final part of the tutorial but I'll make the calculator later becaise that's too basic I feel like and I need to do something STRONGER!
+        </div>
+    `
+  },
+  {
+    title: "Notes from my small sesh today",
+    date: "15/10/2026",
+    content: `
+        <div class="notescontent">
+            Wahoo we made the windows resizeable thanks to the one, the only, ChatGPT!!!<br>
+            <s>Make it so that windows can be freely resized</s><br>
+            Tommorow lets make the whole thing only 1 size and other random stuff maybe.<br>
+            Nvm I'll do a calc it's lowk more complicated than it sounds I think.<br>
+        </div>
+    `
+  },
+  {
+    title: "Today",
+    date: "16/10/2026",
+    content: `
+        <div class="notescontent">
+            <s>Make it so that the WebOS has a fixed size so that when you drag a window down to the bottom of the screen, it doesn't create extra space that you can scroll down</s>
+        </div>
+    `
+  },
+  {
+    title: "Larger session today",
+    date: "17/10/2026",
+    content: `
+        <div class="notescontent">
+            <s>make no notes appear in the main area to begin with, only when you click on a tab in the sidebar</s> - I'm lowk not doing this anymore
+            I'm not making just any normal calculator. NO! I will make a proper calculator with pie, squares, ETC...!
+            <s>Make it so that you can't drag a window outside of the screen</s> - ts is dumb because i dont think i can anyway
+            <s>Make it so there two different tabs, one that displays my notes, and one that the user can type in (the text saying 'MY NOTES' is just a placeholder pretty much for what will be a tab on this window)</s>
+        </div>
+    `
+  },
+  {
+    title: "TEST NOTE",
+    date: "TEST DATE",
+    content: `
+        <div class="notescontent">
+            <span><strong style="font-size: 75px;">TEST TEST TEST TEST TEST</strong></span><br>
+            my test was unsuccessful but then successful
+        </div>
+    `
+  },
+]
+
+function setNotesContent(index) {
+
+  var notesContent = document.querySelector("#notescontent")
+
+  notesContent.innerHTML = content[index].content
+}
+
+setNotesContent(0)
+
+function addToSideBar(index) {
+
+    var sidebar = document.querySelector("#sidebar");
+
+    var note = content[index];
+
+    var newDiv = document.createElement("div");
+    newDiv.style.cursor = "pointer";
+    newDiv.style.marginBottom = "3em";
+
+    newDiv.innerHTML = `
+        <p style="margin: 0px;">
+            ${note.title}
+        </p>
+        <p style="font-size: 12px; margin: 0px;">
+            ${note.date}
+        </p>
+    `;
+
+    newDiv.addEventListener("click", function() {
+        setNotesContent(index);
+    });
+
+    sidebar.appendChild(newDiv);
+}
+
+for (let i = 0; i < content.length; i++) {
+    addToSideBar(i);
+}
+
+function makeResizable(element) {
+
+    // The four edges and four corners
+    var directions = ["n", "e", "s", "w", "ne", "nw", "se", "sw"];
+
+    directions.forEach(function(direction) {
+
+        // Create a resize handle
+        var handle = document.createElement("div");
+
+        handle.className = "resize-handle resize-" + direction;
+
+        // Put the handle inside the window
+        element.appendChild(handle);
+
+        // Start resizing when the handle is pressed
+        handle.addEventListener("mousedown", function(event) {
+
+            event.preventDefault();
+
+            // Remember the mouse position
+            var startX = event.clientX;
+            var startY = event.clientY;
+
+            // Remember the window's original size and position
+            var startWidth = element.offsetWidth;
+            var startHeight = element.offsetHeight;
+            var startLeft = element.offsetLeft;
+            var startTop = element.offsetTop;
+
+            // Get the minimum dimensions from the CSS
+            var minWidth = parseFloat(getComputedStyle(element).minWidth) || 350;
+            var minHeight = parseFloat(getComputedStyle(element).minHeight) || 200;
+
+            // Keep the resize cursor visible while dragging
+            var oldCursor = document.body.style.cursor;
+            document.body.style.cursor = getComputedStyle(handle).cursor;
+
+            function resizeWindow(event) {
+
+                var changeX = event.clientX - startX;
+                var changeY = event.clientY - startY;
+
+                // Begin with the original dimensions
+                var newWidth = startWidth;
+                var newHeight = startHeight;
+                var newLeft = startLeft;
+                var newTop = startTop;
+
+                // Resize from the right
+                if (direction.includes("e")) {
+                    newWidth = Math.max(minWidth, startWidth + changeX);
+                }
+
+                // Resize from the left
+                if (direction.includes("w")) {
+                    newWidth = Math.max(minWidth, startWidth - changeX);
+                    newLeft = startLeft + startWidth - newWidth;
+                }
+
+                // Resize from the bottom
+                if (direction.includes("s")) {
+                    newHeight = Math.max(minHeight, startHeight + changeY);
+                }
+
+                // Resize from the top
+                if (direction.includes("n")) {
+                    newHeight = Math.max(minHeight, startHeight - changeY);
+                    newTop = startTop + startHeight - newHeight;
+                }
+
+                // Apply the new size and position
+                element.style.width = newWidth + "px";
+                element.style.height = newHeight + "px";
+                element.style.left = newLeft + "px";
+                element.style.top = newTop + "px";
+            }
+
+            function stopResizing() {
+                document.removeEventListener("mousemove", resizeWindow);
+                document.removeEventListener("mouseup", stopResizing);
+
+                // Restore the previous cursor
+                document.body.style.cursor = oldCursor;
+            }
+
+            // Keep resizing while the mouse moves
+            document.addEventListener("mousemove", resizeWindow);
+            document.addEventListener("mouseup", stopResizing);
+
+        });
+    });
+}
+
+makeResizable(welcomeScreen);
+makeResizable(aboutmeScreen);
+makeResizable(notesScreen);
+
+function showNotesTab(showYourNotes) {
+    var myNotesPanel = document.getElementById("myNotesPanel");
+    var yourNotesPanel = document.getElementById("yourNotesPanel");
+
+    var myNotesButton = document.getElementById("myNotesButton");
+    var yourNotesButton = document.getElementById("yourNotesButton");
+
+    // Show one panel and hide the other
+    myNotesPanel.hidden = showYourNotes;
+    yourNotesPanel.hidden = !showYourNotes;
+
+    // Highlight whichever tab is active
+    myNotesButton.classList.toggle("active", !showYourNotes);
+    yourNotesButton.classList.toggle("active", showYourNotes);
+}
+
+// Click My Notes
+document.getElementById("myNotesButton").addEventListener("click", function() {
+    showNotesTab(false);
+});
+
+// Click Your Notes
+document.getElementById("yourNotesButton").addEventListener("click", function() {
+    showNotesTab(true);
+});
+
+// Start on My Notes
+showNotesTab(false);
+
+var yourNotesMessage = document.getElementById("yourNotesMessage");
+document.getElementById("yourNotesMessageClose").addEventListener("click", function() {
+    closeWindow(yourNotesMessage);
+});

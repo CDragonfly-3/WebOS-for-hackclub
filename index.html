@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
     <style>
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+
       body {
         margin: 0;
         font-family: Arial, sans-serif;
         background-image: url('./images/coolgif.gif');
         background-attachment: fixed;
         background-size: cover;
+        box-sizing: border-box;
+        height: 100vh;
       }
 
       .window {
@@ -19,6 +30,19 @@
         margin: 0;
         width: 1250px;
         position: absolute;
+        display: flex;
+        flex-direction: column;
+        resize: none;
+        overflow: hidden;
+        min-width: 350px;
+        min-height: 200px;
+      }
+
+      .windowcontent {
+        flex: 1;
+        min-width: 0;
+        min-height: 0;
+        overflow-y: auto;
       }
 
       .windowheader {
@@ -32,6 +56,20 @@
         border-radius: 19px 19px 0 0;
         font-weight: 1000;
         margin: -1px -1px 0;
+      }
+
+      .notesbody {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+      }
+
+      #sidebar {
+        width: 300px;
+        flex-shrink: 0;
+        overflow-y: auto;
+        padding: 10px;
+        border-right: 1px solid #ccc;
       }
 
       .selected {
@@ -50,6 +88,12 @@
       .app:hover {
         background-color:rgba(128, 255, 0, 0.3);
         border-radius: 12px;
+      }
+
+      .notescontent {
+        padding: 16px;
+        font-family: "Caveat";
+        font-size: 24px;
       }
 
       h2, h4 {
@@ -109,6 +153,148 @@
         background: transparent;
         text-align: left;
       }
+
+      /* General resize handle settings */
+      .resize-handle {
+        position: absolute;
+        z-index: 1000;
+        user-select: none;
+      }
+
+      /* Top and bottom edges */
+      .resize-n,
+      .resize-s {
+        height: 8px;
+        left: 12px;
+        right: 12px;
+        cursor: ns-resize;
+      }
+
+      .resize-n {
+        top: 0;
+      }
+
+      .resize-s {
+        bottom: 0;
+      }
+
+      /* Left and right edges */
+      .resize-e,
+      .resize-w {
+        width: 8px;
+        top: 12px;
+        bottom: 12px;
+        cursor: ew-resize;
+      }
+
+      .resize-e {
+        right: 0;
+      }
+
+      .resize-w {
+        left: 0;
+      }
+
+      /* The four corners */
+      .resize-ne,
+      .resize-nw,
+      .resize-se,
+      .resize-sw {
+        width: 14px;
+        height: 14px;
+      }
+
+      .resize-ne {
+        top: 0;
+        right: 0;
+        cursor: ne-resize;
+      }
+
+      .resize-nw {
+        top: 0;
+        left: 0;
+        cursor: nw-resize;
+      }
+
+      .resize-se {
+        bottom: 0;
+        right: 0;
+        cursor: se-resize;
+      }
+
+      .resize-sw {
+        bottom: 0;
+        left: 0;
+        cursor: sw-resize;
+      }
+
+      .notes-tabs {
+        display: flex;
+        gap: 8px;
+        padding-bottom: 4px;
+        flex-shrink: 0;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .notes-tab {
+        padding: 4px 12px;
+        border: 1px solid #111;
+        border-radius: 8px;
+        background: #111;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .notes-tab:hover {
+        background: #212121;
+      }
+
+      .notes-tab.active {
+        background: white;
+        color: #111;
+      }
+
+      /* Keep hidden tabs hidden */
+      .tab-panel[hidden] {
+        display: none !important;
+      }
+
+      /* Make the user's notes area fill the remaining space */
+      .your-notes-panel {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 16px;
+      }
+
+      .user-notes-editor {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 200px;
+        gap: 8px;
+      }
+
+      #userNotesInput {
+        flex: 1;
+        min-height: 160px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px;
+        border: 1px solid #777;
+        border-radius: 8px;
+        font: inherit;
+        resize: vertical;
+      }
+
+      #userNotesSaveStatus {
+        margin: 0;
+        font-size: 12px;
+        opacity: 0.7;
+      }
     </style>
   </head>
 
@@ -117,7 +303,7 @@
 
       <div id="top">
         <div id="welcomeheader" class="windowheader">
-          <span>This is ShiteOS</span>
+          <span>Welcome to ShiteOS!</span>
           <span style="cursor: pointer;" id="welcomeclose">X</span>
         </div>
       </div>
@@ -127,6 +313,7 @@
           <span style="font-size: 10px;">(Not actually trademarked)</span>
           <br><br><br><br><br>
           <h2>This is my first project and this WebOS is probably complete shite! (hence the name)</h2>
+          <h5>(At least it probably will be, I'm writing this prematurely - I haven't finished yet)</h5>
           <!-- <div style="text-align: center;">
           <img src="./images/shiteos.png" style="width: 500px;"alt="Happy lil guy">
           </div> -->
@@ -135,7 +322,7 @@
     </div>
     
 
-    <div id="info" class="window" style="top: 500px; left: 150px;">
+    <div id="info" class="window" style="top: 500px; left: 150px; height: 400px;">
 
       <div id="top">
         <div id="infoheader" class="windowheader">
@@ -144,7 +331,7 @@
         </div>
       </div>
 
-      <div style="padding: 20px 25px;">
+      <div class="windowcontent" style="padding: 20px 25px;">
         <span style="font-size: 50px;">About me:</span>
         <br>
         (I don't want to reveal that much information about myself because that's dangerous and whatnot)
@@ -207,15 +394,77 @@
         <p style="text-align: center;">Notes</p>
       </div>
     </div>
-    <div class="window" style="height: 400px; top: 150px; left: 150px; display: none;" id="notes">
+    <div class="window" style="height: 450px; top: 150px; left: 150px;" id="notes"> <!--display: none; AHHHHHHH PLEASE NOTICE THIS SO YOU DON'T FORGET TO PUT IT BACK AHHHHHHHHHHHHHAHAHHAHHAHAHHAHAHAHHAHAHAHAHHA. sorry-->
       <div id="top">
         <div class="windowheader" id="notesheader">
             <span>Notes</span>
+            <div class="notes-tabs">
+              <button type="button" id="myNotesButton" class="notes-tab active">
+                  My Notes
+              </button>
+
+              <button type="button" id="yourNotesButton" class="notes-tab">
+                  Your Notes
+              </button>
+            </div>
             <span style="cursor: pointer;" id="notesclose">X</span>
         </div>
       </div>
-    </div>
+      <div class="notesbody tab-panel" id="myNotesPanel">
+        <div id="sidebar">
+          <!--This is where my JS code adds the sidebar notes with dates-->
+        </div>
+        <div class="windowcontent">
+          <div id="notesmessage" style="padding: 16px; font-weight: 600;">
+            <div style="background-color: rgb(190, 170, 190); padding: 16px; border-radius: 12px;">
+              <strong id="notesmessageclose" style="color:red; cursor: pointer;">Close Message</strong><br><br>
+              Welcome to the notes app! This is a space in which I have written some of my own thoughts and ideas about this project, and other things. There may be new notes here in the future, so check back every now and then to see if there are any new notes! :D
+              <br>
+              Also I will never delete any of my notes that I have written here, I will only cross them off if they are no longer relevant and add new ones!
+              <br><br>
+              You can also write your own notes here if you want to. Write anything you want! It will be saved for next time :D
+            </div>
+          </div>
 
+          <div id="notescontent">
+            <!--This is where my JS code adds my notes-->
+          </div>
+        </div>
+      </div>
+      <div class="your-notes-panel tab-panel" id="yourNotesPanel" hidden>
+
+        <!-- Your existing closable welcome message -->
+        <div id="yourNotesMessage" style="padding: 16px; font-weight: 600;">
+          <div style="background-color: rgb(190, 170, 190); padding: 16px; border-radius: 12px;">
+
+            <strong id="yourNotesMessageClose" style="color: red; cursor: pointer;">
+              Close Message
+            </strong>
+
+            <br><br>
+
+            <h2>Your Notes</h2>
+            <p>This is where your personal notes will go!</p>
+            <p>Your notes will save automatically as you type.</p>
+
+          </div>
+        </div>
+
+        <!-- The user's text editor -->
+        <div class="user-notes-editor">
+          <label for="userNotesInput">Write your notes:</label>
+
+          <textarea
+            id="userNotesInput"
+            placeholder="Start typing your notes here..."
+          ></textarea>
+
+          <p id="userNotesSaveStatus">Saved automatically in this browser.</p>
+        </div>
+
+      </div>
+    </div>
+    
     <script src="script.js"></script>
   </body>
 </html>

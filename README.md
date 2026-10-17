@@ -1,2 +1,2 @@
 # WebOS-for-hackclub
-My own WebOS (my first project!!)
+My own WebOS (my very first project!!)
