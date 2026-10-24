@@ -351,7 +351,7 @@ var content = [
     `
   },
   {
-    title: "Next app in progress",
+    title: "Next app in progress + longest session yet 🤯 - I want to get this done lol Stardance ends on the 31st of Oct",
     date: "24/10/2026",
     content: `
         <div class="notescontent">
@@ -608,3 +608,4 @@ userNotesInput.addEventListener("mouseup", function() {
 userNotesInput.addEventListener("keyup", updateSelection);
 userNotesInput.addEventListener("input", updateSelection);
 userNotesInput.addEventListener("click", updateSelection);
+
