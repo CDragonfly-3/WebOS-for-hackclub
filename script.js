@@ -45,9 +45,16 @@ function dragElement(element) {
         var movementX = e.clientX - startMouseX;
         var movementY = e.clientY - startMouseY;
 
+        //boundaries
+        var newLeft = startElementX + movementX;
+        var newTop = startElementY + movementY;
+
+        newLeft = Math.max(0, Math.min((window.innerWidth - element.offsetWidth), newLeft));
+        newTop = Math.max(0, Math.min((window.innerHeight - header.offsetHeight-44), newTop));
+
         // Move the window by exactly that amount
-        element.style.left = (startElementX + movementX) + "px";
-        element.style.top = (startElementY + movementY) + "px";
+        element.style.left = newLeft + "px";
+        element.style.top = newTop + "px";
     }
 
     function stopDragging() {
@@ -61,6 +68,7 @@ function dragElement(element) {
 dragElement(document.getElementById("welcome"));
 dragElement(document.getElementById("info"));
 dragElement(document.getElementById("notes"));
+dragElement(document.getElementById("suggestions"));
 
 // --------------------------------------------------
 // OPEN / CLOSE
@@ -72,6 +80,7 @@ var notesScreen = document.getElementById("notes");
 var notesMessage = document.getElementById("notesmessage");
 var welcomePagesToggle = document.getElementById("welcome-pages-toggle");
 var welcomePagesMenu = document.getElementById("welcome-pages-menu");
+var suggestionsScreen = document.getElementById("suggestions");
 
 function setWelcomePagesOpen(isOpen) {
     welcomePagesToggle.setAttribute("aria-expanded", String(isOpen));
@@ -127,7 +136,7 @@ document.getElementById("infoopen").addEventListener("click", function() {
     openWindow(aboutmeScreen);
 });
 
-// Notes window
+// Notes message
 document.getElementById("notesclose").addEventListener("click", function() {
     closeWindow(notesScreen);
     deselectIcon(document.querySelector("#notesopen .app"));
@@ -138,6 +147,11 @@ document.getElementById("notesmessageclose").addEventListener("click", function(
     closeWindow(notesMessage);
 });
 
+//suggestions window
+document.getElementById("suggestionsClose").addEventListener("click", function() {
+    closeWindow(suggestionsScreen);
+    deselectIcon(document.querySelector("#suggestionsOpen .app"));
+});
 
 var selectedIcon = undefined
 
@@ -150,20 +164,6 @@ function deselectIcon(element) {
   element.classList.remove("selected");
   selectedIcon = undefined
 }
-
-function handleIconTap(element) {
-  if (element.classList.contains("selected")) {
-    deselectIcon(element);
-    closeWindow(notesScreen);
-  } else {
-    selectIcon(element);
-    openWindow(notesScreen);
-  }
-}
-
-document.querySelector("#notesopen .app").addEventListener("click", function() {
-    handleIconTap(this);
-});
 
 var biggestIndex = 1;
 
@@ -187,10 +187,30 @@ function handleWindowTap(element) {
 addWindowTapHandling(welcomeScreen);
 addWindowTapHandling(aboutmeScreen);
 addWindowTapHandling(notesScreen);
+addWindowTapHandling(suggestionsScreen);
+
+function handleIconTap(element, windowElement) {
+  if (element.classList.contains("selected")) {
+    deselectIcon(element);
+    closeWindow(windowElement);
+  } else {
+    selectIcon(element);
+    openWindow(windowElement);
+    handleWindowTap(windowElement);
+  }
+}
+
+document.querySelector("#notesopen .app").addEventListener("click", function() {
+    handleIconTap(this, notesScreen);
+});
+
+document.querySelector("#suggestionsOpen .app").addEventListener("click", function() {
+    handleIconTap(this, suggestionsScreen);
+});
 
 var content = [
     {
-        title: "All my notes (a collection of every note, organized and updated)",
+        title: "All my notes (a collection of every note, organized and updated) <s>I abandoned this. Including and after 24/10/2026 there will no longer be any more notes going here except for the first one I made that day.</s> - I changed my mind.",
         date: "Some date fr",
         content: `
             <div class="notescontent">
@@ -198,12 +218,12 @@ var content = [
                 <p><u style="font-size: 24px;">To Do:</u></p>
                 <ul>
                     <li><s>Make it so there two different tabs, one that displays my notes, and one that the user can type in (the text saying 'MY NOTES' is just a placeholder pretty much for what will be a tab on this window)</s></li>
-                    <li>Make it so the user can write their notes - whatever they want - and they will be saved for next time</li>
-                    <s><li>Make it so you can scroll on the notes page</li></s>
+                    <li><s>Make it so the user can write their notes - whatever they want - and they will be saved for next time</s></li>
+                    <li><s>Make it so you can scroll on the notes page</s></li>
                     <li><s>Make it so that windows can be freely resized</s></li>
                     <li>Make it so that the user can customize the background of the WebOS (maybe even make it so they can upload their own image) or that they can choose the colour of the background of a window, the outline of a window, etc...</li>
                     <li><s>Make it so that the notes message thing doesn't get affected by the sidebar and just sits at the top of the notes window</s> This point is irrelevant as I will no longer be doing it.</li>
-                    <li><s>Make it so that you can't drag a window outside of the screen</s> - ts is dumb because I dont think I can anyway</li>
+                    <li><s>Make it so that you can't drag a window outside of the screen - ts is dumb because I dont think I can anyway</s> - I am dumb I could do this but I fixed it now so it's chill</li>
                     <li><s>Make it so that the WebOS has a fixed size so that when you drag a window down to the bottom of the screen, it doesn't create extra space that you can scroll down</s></li>
                     <li>Make a calculator app</li>
                     <li><s>FIX ISSUES - make no notes appear in the main area to begin with, only when you click on a tab in the sidebar(I'm lowk not doing this anymore), make the cursor different when hovering over an option in the sidebar, fix the issue that makes everything break  when I add another note</s></li>
@@ -221,6 +241,12 @@ var content = [
                     <li>Wahoo we made the windows resizeable thanks to the one, the only, ChatGPT!!!</li>
                     <li>Tommorow lets make the whole thing only 1 size and other random stuff maybe.</li>
                     <li>I'm not making just any normal calculator. NO! I will make a proper calculator with pie, squares, ETC...!</li>
+                    <li>I actually love ChatGPT sm omg they're literally carrying me on their shoulders man (nah I'd win. sorry whats wrong with me)</li>
+                    <li>I think it'd be cool to make a word and character count</li>
+                    <li>Lets go I made the word and character count. Idk if I want to make it so that when you highlight text it displays the stats for the text you highlighted but we'll see.</li>
+                    <li>I finished the feature that displays the counts for highlighted text! :D</li>
+                    <li>Idk why I haven't made a note in ages. Maybe nothing significant to note on happened</li>
+                    <li><s>Yk what I'm not going to add anything anymore to the 'all my notes in one place' bit because who's looking at these anyway.</s></li>
                 </div>
             </div>
         `
@@ -295,11 +321,44 @@ var content = [
     date: "17/10/2026",
     content: `
         <div class="notescontent">
-            <s>make no notes appear in the main area to begin with, only when you click on a tab in the sidebar</s> - I'm lowk not doing this anymore
-            I'm not making just any normal calculator. NO! I will make a proper calculator with pie, squares, ETC...!
-            <s>Make it so that you can't drag a window outside of the screen</s> - ts is dumb because i dont think i can anyway
-            <s>Make it so there two different tabs, one that displays my notes, and one that the user can type in (the text saying 'MY NOTES' is just a placeholder pretty much for what will be a tab on this window)</s>
+            <s>make no notes appear in the main area to begin with, only when you click on a tab in the sidebar</s> - I'm lowk not doing this anymore<br>
+            I'm not making just any normal calculator. NO! I will make a proper calculator with pie, squares, ETC...!<br>
+            <s>Make it so that you can't drag a window outside of the screen</s> - ts is dumb because i dont think i can anyway<br>
+            <s>Make it so there two different tabs, one that displays my notes, and one that the user can type in (the text saying 'MY NOTES' is just a placeholder pretty much for what will be a tab on this window)</s><br>
+            <s>Make it so the user can write their notes - whatever they want - and they will be saved for next time</s><br>
+            I actually love ChatGPT sm omg they're literally carrying me on their shoulders man (nah I'd win. sorry whats wrong with me)<br>
+            I think it'd be cool to make a word and character count
         </div>
+    `
+  },
+  {
+    title: "FINISHED THE NOTES APP (for now) LETS GOOO (nvm I keep adding features)",
+    date: "18/10/2026",
+    content: `
+        <div class="notescontent">
+            Yo I wanna make a character count excluding spaces too that'd be cool I think.<br>
+            Lets go I made the word and character count. Idk if I want to make it so that when you highlight text it displays the stats for the text you highlighted but we'll see.
+        </div>
+    `
+  },
+  {
+    title: "I finished the highlight bit",
+    date: "20/10/2026",
+    content: `
+        <div class="notescontent">
+            I finished the feature that displays the counts for highlighted text! :)
+        </div>
+    `
+  },
+  {
+    title: "Next app in progress",
+    date: "24/10/2026",
+    content: `
+        <div class="notescontent">
+            Idk why I haven't made a note in ages. Maybe nothing significant to note on happened<br>
+            <s>Yk what I'm not going to add anything anymore to the 'all my notes in one place' bit because who's looking at these anyway.</s><br>
+            Yippe I made it so you can't drag windows out of the screen - turns out I could!
+        <div>
     `
   },
   {
@@ -370,7 +429,7 @@ function makeResizable(element) {
 
         // Start resizing when the handle is pressed
         handle.addEventListener("mousedown", function(event) {
-
+            
             event.preventDefault();
 
             // Remember the mouse position
@@ -450,6 +509,7 @@ function makeResizable(element) {
 makeResizable(welcomeScreen);
 makeResizable(aboutmeScreen);
 makeResizable(notesScreen);
+makeResizable(suggestionsScreen);
 
 function showNotesTab(showYourNotes) {
     var myNotesPanel = document.getElementById("myNotesPanel");
@@ -484,3 +544,67 @@ var yourNotesMessage = document.getElementById("yourNotesMessage");
 document.getElementById("yourNotesMessageClose").addEventListener("click", function() {
     closeWindow(yourNotesMessage);
 });
+
+// Find the user's notes text box
+var userNotesInput = document.getElementById("userNotesInput");
+
+// Load previously saved notes when ShiteOS starts
+userNotesInput.value = localStorage.getItem("shiteOSUserNotes") || "";
+
+// Save the notes whenever the user types
+userNotesInput.addEventListener("input", function() {
+    localStorage.setItem("shiteOSUserNotes", userNotesInput.value);
+});
+
+var wordCount = document.getElementById("Words");
+var charsCount = document.getElementById("Chars");
+var charsNoSpacesCount = document.getElementById("Chars-Spaces");
+
+function updateCounters() {
+    var text = userNotesInput.value.trim();
+    var words;
+    if (text === "") {
+        words = 0;
+    } else {
+        words = text.split(/\s+/).length;
+    }
+    wordCount.textContent = "Words: " + words;
+    charsCount.textContent = "Characters: " + userNotesInput.value.length;
+    charsNoSpacesCount.textContent = "Characters excluding spaces: " + userNotesInput.value.replace(/\s/g, "").length;
+}
+
+updateCounters();
+
+userNotesInput.addEventListener("input", updateCounters);
+
+var selectionPreview = document.getElementById("selectionPreview");
+
+function updateSelection() {
+    var highlighted = userNotesInput.value.slice(userNotesInput.selectionStart, userNotesInput.selectionEnd);
+
+    if (userNotesInput.selectionStart === userNotesInput.selectionEnd) {
+        highlighted = "none";
+        updateCounters();
+    } else {
+        var text = highlighted.trim();
+        var words;
+        if (text === "") {
+            words = 0;
+        } else {
+            words = text.split(/\s+/).length;
+        }
+        wordCount.textContent = "Words: " + words;
+        charsCount.textContent = "Characters: " + highlighted.length;
+        charsNoSpacesCount.textContent = "Characters excluding spaces: " + highlighted.replace(/\s/g, "").length;
+    }
+
+    selectionPreview.textContent = "Selected text: " + highlighted;
+}
+
+userNotesInput.addEventListener("select", updateSelection);
+userNotesInput.addEventListener("mouseup", function() {
+    setTimeout(updateSelection, 0);
+});
+userNotesInput.addEventListener("keyup", updateSelection);
+userNotesInput.addEventListener("input", updateSelection);
+userNotesInput.addEventListener("click", updateSelection);

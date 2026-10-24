@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
       html, body {
         width: 100%;
@@ -21,81 +22,6 @@
         height: 100vh;
       }
 
-      .window {
-        background: rgba(255, 255, 255, 1);
-        border: solid;
-        border-color: #111;
-        border-radius: 20px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-        margin: 0;
-        width: 1250px;
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        resize: none;
-        overflow: hidden;
-        min-width: 350px;
-        min-height: 200px;
-      }
-
-      .windowcontent {
-        flex: 1;
-        min-width: 0;
-        min-height: 0;
-        overflow-y: auto;
-      }
-
-      .windowheader {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: move;
-        background-color: #111;
-        color: white;
-        padding: 10px;
-        border-radius: 19px 19px 0 0;
-        font-weight: 1000;
-        margin: -1px -1px 0;
-      }
-
-      .notesbody {
-        display: flex;
-        flex: 1;
-        min-height: 0;
-      }
-
-      #sidebar {
-        width: 300px;
-        flex-shrink: 0;
-        overflow-y: auto;
-        padding: 10px;
-        border-right: 1px solid #ccc;
-      }
-
-      .selected {
-        background-color:rgba(128, 255, 0, 0.3);
-        padding: 8px 8px 0px 8px;
-        border-radius: 12px;
-      }
-
-      .app {
-        display: inline-block;
-        margin-right: 16px;
-        cursor: pointer;
-        padding: 8px 8px 0px 8px;
-      }
-
-      .app:hover {
-        background-color:rgba(128, 255, 0, 0.3);
-        border-radius: 12px;
-      }
-
-      .notescontent {
-        padding: 16px;
-        font-family: "Caveat";
-        font-size: 24px;
-      }
-
       h2, h4 {
         margin-top: 0;
       }
@@ -108,192 +34,6 @@
 
       a {
         color: #111;
-      }
-
-      .welcome-pages {
-        position: relative;
-      }
-
-      .bottom-bar-button,
-      .welcome-page-link {
-        border: 0;
-        color: white;
-        font: inherit;
-        font-weight: 750;
-        cursor: pointer;
-      }
-
-      .bottom-bar-button {
-        background-color: #44444488;
-        padding: 4px 12px;
-        border-radius: 100px;
-      }
-
-      .bottom-bar-button:hover,
-      .welcome-page-link:hover {
-        background-color: #666;
-      }
-
-      .welcome-pages-menu {
-        position: absolute;
-        bottom: calc(100% + 8px);
-        left: 0;
-        min-width: max-content;
-        padding: 6px;
-        border-radius: 8px;
-        background-color: #222;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      }
-
-      .welcome-page-link {
-        display: block;
-        width: 100%;
-        padding: 8px 12px;
-        border-radius: 5px;
-        background: transparent;
-        text-align: left;
-      }
-
-      /* General resize handle settings */
-      .resize-handle {
-        position: absolute;
-        z-index: 1000;
-        user-select: none;
-      }
-
-      /* Top and bottom edges */
-      .resize-n,
-      .resize-s {
-        height: 8px;
-        left: 12px;
-        right: 12px;
-        cursor: ns-resize;
-      }
-
-      .resize-n {
-        top: 0;
-      }
-
-      .resize-s {
-        bottom: 0;
-      }
-
-      /* Left and right edges */
-      .resize-e,
-      .resize-w {
-        width: 8px;
-        top: 12px;
-        bottom: 12px;
-        cursor: ew-resize;
-      }
-
-      .resize-e {
-        right: 0;
-      }
-
-      .resize-w {
-        left: 0;
-      }
-
-      /* The four corners */
-      .resize-ne,
-      .resize-nw,
-      .resize-se,
-      .resize-sw {
-        width: 14px;
-        height: 14px;
-      }
-
-      .resize-ne {
-        top: 0;
-        right: 0;
-        cursor: ne-resize;
-      }
-
-      .resize-nw {
-        top: 0;
-        left: 0;
-        cursor: nw-resize;
-      }
-
-      .resize-se {
-        bottom: 0;
-        right: 0;
-        cursor: se-resize;
-      }
-
-      .resize-sw {
-        bottom: 0;
-        left: 0;
-        cursor: sw-resize;
-      }
-
-      .notes-tabs {
-        display: flex;
-        gap: 8px;
-        padding-bottom: 4px;
-        flex-shrink: 0;
-        border-bottom: 1px solid #ccc;
-      }
-
-      .notes-tab {
-        padding: 4px 12px;
-        border: 1px solid #111;
-        border-radius: 8px;
-        background: #111;
-        color: white;
-        cursor: pointer;
-        font-weight: bold;
-      }
-
-      .notes-tab:hover {
-        background: #212121;
-      }
-
-      .notes-tab.active {
-        background: white;
-        color: #111;
-      }
-
-      /* Keep hidden tabs hidden */
-      .tab-panel[hidden] {
-        display: none !important;
-      }
-
-      /* Make the user's notes area fill the remaining space */
-      .your-notes-panel {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        min-height: 0;
-        overflow-y: auto;
-        padding: 16px;
-      }
-
-      .user-notes-editor {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        min-height: 200px;
-        gap: 8px;
-      }
-
-      #userNotesInput {
-        flex: 1;
-        min-height: 160px;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 12px;
-        border: 1px solid #777;
-        border-radius: 8px;
-        font: inherit;
-        resize: vertical;
-      }
-
-      #userNotesSaveStatus {
-        margin: 0;
-        font-size: 12px;
-        opacity: 0.7;
       }
     </style>
   </head>
@@ -343,7 +83,7 @@
           <li>Basically all STEM things to be honest</li>
           <li>Gaming</li>
           <li>Art</li>
-          <li>ROCK CLIMBING!!!!! (I'm not <i>that</i> good - my hardest as of writing this is only V4 :/ but I'm getting better!)</li>
+          <li>ROCK CLIMBING!!!!! (I'm not <i>that</i> good - my hardest as of writing this is only V4 :/ but I'm getting better!) Oh also I am NICAS level 4 (working throught it) so that's pretty cool eh?</li>
           <li>Chess (I'm not <i>that</i> good at this either - I'm like 600 elo but I think I deserve at least 800 or 1000 but if I just play more games, I'm sure I can get there!)</li>
           <li>To be honest, I just like boardgames and things like that a lot just in general.</li>
         </ul>
@@ -367,15 +107,14 @@
       </div>
     </div>
 
-    <div style="position: fixed; bottom: 0; left: 0; right: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(15px); background-color:#111111b8; padding: 10px; color: white; z-index: 10000">
+    <div style="position: fixed; bottom: 0; left: 0; right: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(15px); background-color:#111111b8; padding: 10px; color: white; z-index: 10000; height: 45px;">
       <span style="font-weight: 1000; background-color: #44444488; padding: 4px 12px; border-radius: 100px;">
         ShiteOS
       </span>
 
       <div class="welcome-pages">
-        <button id="welcome-pages-toggle" class="bottom-bar-button" type="button" aria-expanded="false" aria-controls="welcome-pages-menu">
+        <button id="welcome-pages-toggle" class="bottom-bar-button" type="button" aria-expanded="false" aria-controls="welcome-pages-menu" title="You can open the About me page (and the other one) from here">
           Welcome Pages ^
-
         </button>
         <div id="welcome-pages-menu" class="welcome-pages-menu" hidden>
           <button id="welcomeopen" class="welcome-page-link" type="button">Open the welcome page</button>
@@ -388,13 +127,23 @@
       </span>
     </div>
 
-    <div id="notesopen" style="padding-top: 16px; padding-left: 16px;">
-      <div class="app">
+    <div id="notesopen" style="padding: 16px;">
+      <div class="app" title="Where I write my notes and you can write your own!">
         <img src="./images/notepad.jpeg" alt="Notepad" style="width: 64px; height: 64px;">
         <p style="text-align: center;">Notes</p>
       </div>
     </div>
-    <div class="window" style="height: 450px; top: 150px; left: 150px;" id="notes"> <!--display: none; AHHHHHHH PLEASE NOTICE THIS SO YOU DON'T FORGET TO PUT IT BACK AHHHHHHHHHHHHHAHAHHAHHAHAHHAHAHAHHAHAHAHAHHA. sorry-->
+
+    <div>
+      <div id="suggestionsOpen" style="padding: 16px; width: 72px;">
+        <div class="app" title="(Suggest features/apps for this WebOS)">
+          <img src="./images/speak.png" alt="FILL IN" style="width: 64px; height: 64px;">
+          <p style="text-align: center;">Suggest- ions</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="window" style="height: 450px; top: 150px; left: 150px; display: none" id="notes">
       <div id="top">
         <div class="windowheader" id="notesheader">
             <span>Notes</span>
@@ -459,9 +208,25 @@
             placeholder="Start typing your notes here..."
           ></textarea>
 
-          <p id="userNotesSaveStatus">Saved automatically in this browser.</p>
+          <div style="display: flex; justify-content: space-between;">
+            <p id="userNotesSaveStatus">Your notes are saved automatically in this browser.</p>
+            <p id="selectionPreview">Selected text: none</p>
+            <p id="wordAndCharacterCount" style="display: flex; gap: 24px;">
+              <span id="Words">Words: 0</span>
+              <span id="Chars">Characters:0</span>
+              <span id="Chars-Spaces">Characters excluding spaces: 0</span>
+            </p>
+          </div>
         </div>
+      </div>
+    </div>
 
+    <div class="window" style="height: 450px; top: 150px; left: 150px;" id="suggestions">
+      <div id="top">
+        <div id="suggestionsheader" class="windowheader">
+          <span>Suggestions</span>
+          <span style="cursor: pointer;" id="suggestionsClose">X</span>
+        </div>
       </div>
     </div>
     
