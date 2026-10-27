@@ -5,6 +5,41 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_PUBLISHABLE_KEY
 );
 
+// async function testSupabaseConnection() {
+//     const { data, error } = await supabaseClient
+//         .from("suggestions")
+//         .select("*");
+
+//     if (error) {
+//         console.error("Supabase error:", error.message);
+//         return;
+//     }
+
+//     console.log("Connection successful!");
+//     console.log(data);
+// }
+
+// testSupabaseConnection();
+
+async function loadSuggestions() {
+    const { data, error } = await supabaseClient
+        .from("suggestions")
+        .select("*");
+
+    if (error) {
+        console.error("Failed to load suggestions:", error.message);
+        return;
+    }
+
+    document.getElementById("suggestionList").innerHTML = "";
+
+    for (var item of data) {
+        createSuggestionCard(item.name, item.title, item.category, item.description)
+    }
+}
+
+// CLOCK
+
 function updateTime() {
     var WordsOfTime = document.getElementById("timeElement");
     WordsOfTime.innerHTML = new Date().toLocaleString();
@@ -213,6 +248,10 @@ document.querySelector("#notesopen .app").addEventListener("click", function() {
 
 document.querySelector("#suggestionsOpen .app").addEventListener("click", function() {
     handleIconTap(this, suggestionsScreen);
+
+    if (suggestionsScreen.style.display !== "none") {
+        loadSuggestions();
+    }
 });
 
 var content = [
@@ -253,7 +292,8 @@ var content = [
                     <li>Lets go I made the word and character count. Idk if I want to make it so that when you highlight text it displays the stats for the text you highlighted but we'll see.</li>
                     <li>I finished the feature that displays the counts for highlighted text! :D</li>
                     <li>Idk why I haven't made a note in ages. Maybe nothing significant to note on happened</li>
-                    <li><s>Yk what I'm not going to add anything anymore to the 'all my notes in one place' bit because who's looking at these anyway.</s></li>
+                    <li><s>Yk what I'm not going to add anything anymore to the 'all my notes in one place' bit because who's looking at these anyway.</s> - I changed my mind</li>
+                    <li>Yoooooo I finished the second appppp!! Now Ima ship.</li>
                 </div>
             </div>
         `
@@ -366,6 +406,15 @@ var content = [
             <s>Yk what I'm not going to add anything anymore to the 'all my notes in one place' bit because who's looking at these anyway.</s><br>
             Yippe I made it so you can't drag windows out of the screen - turns out I could!
         <div>
+    `
+  },
+  {
+    title: "Done (I'll probably add more features at some point) with the app lets goo! and damn this was a long session (4h []m)!",
+    date: "27/10/2026",
+    content: `
+        <div class="notescontent">
+            Yoooooo I finished the second appppp!! Now Ima ship.
+        </div>
     `
   },
   {
@@ -649,17 +698,8 @@ userNotesInput.addEventListener("keyup", updateSelection);
 userNotesInput.addEventListener("input", updateSelection);
 userNotesInput.addEventListener("click", updateSelection);
 
-var form = document.getElementById("suggestionForm");
-form.addEventListener("submit", function(event) {
-   event.preventDefault();
-   var suggestionName = document.getElementById("suggestionName").value;
-   var suggestion = document.getElementById("suggestion").value;
-   var suggestionCategory = document.getElementById("category").value;
-   var suggestionDescription = document.getElementById("suggestionDescription").value;
-   if (suggestionName.trim() === "") {
-    suggestionName = "Anonymous";
-   }
-   var card = document.createElement("div");
+function createSuggestionCard(suggestionName, suggestion, suggestionCategory, suggestionDescription) {
+    var card = document.createElement("div");
    card.classList.add("suggestion-card");
 
    var name = document.createElement("h4");
@@ -691,5 +731,40 @@ form.addEventListener("submit", function(event) {
    card.appendChild(description);
 
    document.getElementById("suggestionList").appendChild(card);
-   form.reset()
+}
+
+var form = document.getElementById("suggestionForm");
+form.addEventListener("submit", async function(event) {
+   event.preventDefault();
+   var suggestionName = document.getElementById("suggestionName").value;
+   var suggestion = document.getElementById("suggestion").value;
+   var suggestionCategory = document.getElementById("category").value;
+   var suggestionDescription = document.getElementById("suggestionDescription").value;
+   if (suggestionName.trim() === "") {
+    suggestionName = "Anonymous";
+   }
+
+    const { error } = await supabaseClient
+        .from("suggestions")
+        .insert({
+            name: suggestionName,
+            title: suggestion,
+            category: suggestionCategory,
+            description: suggestionDescription
+        });
+
+    if (error) {
+        console.error("Failed to save suggestion:", error.message);
+        alert("Your suggestion couldn't be saved. Please try again!");
+        return;
+    }
+
+    createSuggestionCard(
+        suggestionName,
+        suggestion,
+        suggestionCategory,
+        suggestionDescription
+    );
+
+    form.reset()
 });
