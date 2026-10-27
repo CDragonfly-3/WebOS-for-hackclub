@@ -191,7 +191,7 @@
     cursor: sw-resize;
 }
 
-.notes-tabs {
+.tabs {
     display: flex;
     gap: 8px;
     padding-bottom: 4px;
@@ -199,7 +199,7 @@
     border-bottom: 1px solid #ccc;
 }
 
-.notes-tab {
+.tab {
     padding: 4px 12px;
     border: 1px solid #111;
     border-radius: 8px;
@@ -209,11 +209,11 @@
     font-weight: bold;
 }
 
-.notes-tab:hover {
+.tab:hover {
     background: #212121;
 }
 
-.notes-tab.active {
+.tab.active {
     background: white;
     color: #111;
 }
@@ -270,4 +270,87 @@
     margin: 0;
     font-size: 12px;
     opacity: 0.7;
+}
+
+.form-box {
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #111;
+    border-radius: 8px;
+    font: inherit;
+    resize: vertical;
+}
+
+.submit-button {
+    width: 100%;
+    background: linear-gradient(45deg, purple, blue, cyan);
+    border-radius: 16px;
+    height: 75px;
+    font-size: 50px;
+    color: white;
+    font-family: "Caveat";
+    border-color: darkgoldenrod;
+    cursor: pointer;
+    transition: transform 0.15s, filter 0.15s;
+}
+
+.submit-button:hover {
+    filter: brightness(2);
+}
+
+.submit-button:active {
+    transform: scale(0.98);
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, darkorange, orange, coral, hotpink);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.suggestion-card {
+    white-space: pre-line;
+    border: 2px solid goldenrod;
+    background-color: rgba(128, 128, 128, 0.25);
+    border-radius: 16px;
+    padding: 12px;
+    margin-bottom: 12px;
+    position: relative;
+    overflow-wrap: anywhere;
+}
+
+.suggestion-category {
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
+.category-app-idea {
+    background-color: #d7c1ff;
+    color: #55238c;
+}
+
+.category-new-feature {
+    background-color: lightblue;
+    color: blue;
+}
+
+.category-ui-change {
+    background-color: rgb(200, 255, 200);
+    color: lime;
+}
+
+.category-bug-fix {
+    background-color: rgb(255, 225, 165);
+    color: orange;
+}
+
+.category-other {
+    background-color: rgb(120, 120, 120);
+    color: rgb(33, 33, 33);
 }

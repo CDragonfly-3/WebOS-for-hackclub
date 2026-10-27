@@ -39,7 +39,7 @@
   </head>
 
   <body>
-    <div id="welcome" class="window" style="top: 25px; left: 150px;">
+    <div id="welcome" class="window" style="top: 25px; left: 150px;"> <!--z-index: 1; AHH PLEASE NOTICE THIS PUT IT BACK PLEASE-->
 
       <div id="top">
         <div id="welcomeheader" class="windowheader">
@@ -49,7 +49,7 @@
       </div>
 
       <div style="padding: 20px 25px;">
-          <h1 style="text-align: center; font-size: 100px;">This is ShiteOS™</h1>
+          <h1 style="text-align: center; font-size: 100px;" class="gradient-text">This is ShiteOS™</h1>
           <span style="font-size: 10px;">(Not actually trademarked)</span>
           <br><br><br><br><br>
           <h2>This is my first project and this WebOS is probably complete shite! (hence the name)</h2>
@@ -83,7 +83,7 @@
           <li>Basically all STEM things to be honest</li>
           <li>Gaming</li>
           <li>Art</li>
-          <li>ROCK CLIMBING!!!!! (I'm not <i>that</i> good - my hardest as of writing this is only V4 :/ but I'm getting better!) Oh also I am NICAS level 4 (working throught it) so that's pretty cool eh?</li>
+          <li>ROCK CLIMBING!! (I'm not <i>that</i> good - my hardest as of writing this is only V4 :/ but I'm getting better!) Oh also I am NICAS level 4 (working through it) so that's pretty cool I think?</li>
           <li>Chess (I'm not <i>that</i> good at this either - I'm like 600 elo but I think I deserve at least 800 or 1000 but if I just play more games, I'm sure I can get there!)</li>
           <li>To be honest, I just like boardgames and things like that a lot just in general.</li>
         </ul>
@@ -147,18 +147,19 @@
       <div id="top">
         <div class="windowheader" id="notesheader">
             <span>Notes</span>
-            <div class="notes-tabs">
-              <button type="button" id="myNotesButton" class="notes-tab active">
+            <div class="tabs">
+              <button type="button" id="myNotesButton" class="tab active">
                   My Notes
               </button>
 
-              <button type="button" id="yourNotesButton" class="notes-tab">
+              <button type="button" id="yourNotesButton" class="tab">
                   Your Notes
               </button>
             </div>
             <span style="cursor: pointer;" id="notesclose">X</span>
         </div>
       </div>
+
       <div class="notesbody tab-panel" id="myNotesPanel">
         <div id="sidebar">
           <!--This is where my JS code adds the sidebar notes with dates-->
@@ -181,8 +182,6 @@
         </div>
       </div>
       <div class="your-notes-panel tab-panel" id="yourNotesPanel" hidden>
-
-        <!-- Your existing closable welcome message -->
         <div id="yourNotesMessage" style="padding: 16px; font-weight: 600;">
           <div style="background-color: rgb(190, 170, 190); padding: 16px; border-radius: 12px;">
 
@@ -225,11 +224,71 @@
       <div id="top">
         <div id="suggestionsheader" class="windowheader">
           <span>Suggestions</span>
+
+          <div class="tabs">
+            <button type="button" id="browseButton" class="tab active">
+                Browse Suggestions
+            </button>
+
+            <button type="button" id="formButton" class="tab">
+                Suggestions/Bug Fixes Form
+            </button>
+          </div>
           <span style="cursor: pointer;" id="suggestionsClose">X</span>
         </div>
       </div>
+
+      <div id="browsePanel" style="padding: 16px; overflow-y: auto;">
+        <div id="suggestionList">
+          <!-- JS will add cards here -->
+        </div>
+      </div>
+
+      <div id="formPanel" style="padding: 16px; overflow-y: auto;">
+        <form id="suggestionForm">
+          <label for="suggestionName">Your name (optional)</label>
+          <input
+            type="text"
+            id="suggestionName"
+            placeholder="Enter a nickname..."
+            class="form-box"
+          >
+          <br><br>
+          <label for="suggestion">What is your suggestion/bug you think I should add/fix? (short description) <span style="color: red">*</span></label>
+          <input
+            type="text"
+            id="suggestion"
+            placeholder="Make an app that... / Fix the bug where..."
+            class="form-box"
+            required
+          >
+          <br><br>
+          <label for="category">What category is your suggestion? <span style="color: red">*</span></label>
+          <select id="category" class="form-box" required>
+            <option value="" selected>Choose a category...</option>
+            <option>App idea</option>
+            <option>New feature</option>
+            <option>UI improvement/change</option>
+            <option>Bug fix</option>
+            <option>Other</option>
+          </select>
+          <br><br>
+          <label for="suggestionDescription">Full description of your suggestion</label><br>
+          <textarea
+            id="suggestionDescription"
+            placeholder="Explain your suggestion in more detail..."
+            rows="5"
+            class="form-box"
+          ></textarea>
+          <br><br>
+          <button type="submit" id="submitSuggestion" class="submit-button">
+            Submit Suggestion!
+          </button>
+        </form>
+      </div>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
   </body>
 </html>

@@ -351,7 +351,7 @@ var content = [
     `
   },
   {
-    title: "Next app in progress + longest session yet 🤯 - I want to get this done lol Stardance ends on the 31st of Oct",
+    title: "Next app in progress + longest session yet 🤯 (2h 30m - ikr kinda buns but whatever) - I want to get this done lol Stardance ends on the 31st of Oct",
     date: "24/10/2026",
     content: `
         <div class="notescontent">
@@ -540,6 +540,39 @@ document.getElementById("yourNotesButton").addEventListener("click", function() 
 // Start on My Notes
 showNotesTab(false);
 
+//---------------------------------------------------------------------------------------------------------------
+// SUGGESTIONS WINDOW
+//---------------------------------------------------------------------------------------------------------------
+
+function showSuggestionsTab(showForm) {
+    var browsePanel = document.getElementById("browsePanel");
+    var formPanel = document.getElementById("formPanel");
+
+    var browseButton = document.getElementById("browseButton");
+    var formButton = document.getElementById("formButton");
+
+    // Show one panel and hide the other
+    browsePanel.hidden = showForm;
+    formPanel.hidden = !showForm;
+
+    // Highlight whichever tab is active
+    browseButton.classList.toggle("active", !showForm);
+    formButton.classList.toggle("active", showForm);
+}
+
+// Click browse suggestions
+document.getElementById("browseButton").addEventListener("click", function() {
+    showSuggestionsTab(false);
+});
+
+// Click form
+document.getElementById("formButton").addEventListener("click", function() {
+    showSuggestionsTab(true);
+});
+
+// Start on browse suggestions
+showSuggestionsTab(false);
+
 var yourNotesMessage = document.getElementById("yourNotesMessage");
 document.getElementById("yourNotesMessageClose").addEventListener("click", function() {
     closeWindow(yourNotesMessage);
@@ -609,3 +642,47 @@ userNotesInput.addEventListener("keyup", updateSelection);
 userNotesInput.addEventListener("input", updateSelection);
 userNotesInput.addEventListener("click", updateSelection);
 
+var form = document.getElementById("suggestionForm");
+form.addEventListener("submit", function(event) {
+   event.preventDefault();
+   var suggestionName = document.getElementById("suggestionName").value;
+   var suggestion = document.getElementById("suggestion").value;
+   var suggestionCategory = document.getElementById("category").value;
+   var suggestionDescription = document.getElementById("suggestionDescription").value;
+   if (suggestionName.trim() === "") {
+    suggestionName = "Anonymous";
+   }
+   var card = document.createElement("div");
+   card.classList.add("suggestion-card");
+
+   var name = document.createElement("h4");
+   name.textContent = "Submitted by " + suggestionName + ":";
+   card.appendChild(name);
+
+   var title = document.createElement("h2");
+   title.textContent = suggestion;
+   card.appendChild(title);
+
+   var category = document.createElement("h5");
+   category.textContent = suggestionCategory;
+   category.classList.add("suggestion-category");
+   if (suggestionCategory === "App idea") {
+    category.classList.add("category-app-idea");
+   } else if (suggestionCategory === "New feature") {
+    category.classList.add("category-new-feature");
+   } else if (suggestionCategory === "UI improvement/change") {
+    category.classList.add("category-ui-change");
+   } else if (suggestionCategory === "Bug fix") {
+    category.classList.add("category-bug-fix");
+   } else if (suggestionCategory === "Other") {
+    category.classList.add("category-other");
+   }
+   card.appendChild(category);
+
+   var description = document.createElement("span");
+   description.textContent = suggestionDescription;
+   card.appendChild(description);
+
+   document.getElementById("suggestionList").appendChild(card);
+   form.reset()
+});
