@@ -1,3 +1,10 @@
+const SUPABASE_URL = "https://zrvwvgodluawyghxhsut.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_DJGByYF7yjviUxRalKP0Yg_n3lsXJmz";
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
 function updateTime() {
     var WordsOfTime = document.getElementById("timeElement");
     WordsOfTime.innerHTML = new Date().toLocaleString();
