@@ -24,7 +24,8 @@ const supabaseClient = window.supabase.createClient(
 async function loadSuggestions() {
     const { data, error } = await supabaseClient
         .from("suggestions")
-        .select("*");
+        .select("*")
+        .order("created_at", { ascending: false });
 
     if (error) {
         console.error("Failed to load suggestions:", error.message);
@@ -767,4 +768,17 @@ form.addEventListener("submit", async function(event) {
     );
 
     form.reset()
+});
+
+var meowScreen = document.getElementById("meow");
+
+makeResizable(meowScreen);
+
+dragElement(document.getElementById("meow"));
+
+document.getElementById("meowClose").addEventListener("click", function() {
+    closeWindow(meowScreen);
+});
+document.getElementById("meowOpen").addEventListener("click", function() {
+    openWindow(meowScreen);
 });
