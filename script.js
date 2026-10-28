@@ -39,7 +39,16 @@ async function loadSuggestions() {
     }
 }
 
+var userId = localStorage.getItem("shiteos-user-id");
+
+if (userId === null) {
+    userId = crypto.randomUUID();
+    localStorage.setItem("shiteos-user-id", userId);
+}
+
+// --------------------------------------------------
 // CLOCK
+// --------------------------------------------------
 
 function updateTime() {
     var WordsOfTime = document.getElementById("timeElement");
@@ -751,7 +760,8 @@ form.addEventListener("submit", async function(event) {
             name: suggestionName,
             title: suggestion,
             category: suggestionCategory,
-            description: suggestionDescription
+            description: suggestionDescription,
+            user_id: userId
         });
 
     if (error) {
@@ -775,6 +785,8 @@ var meowScreen = document.getElementById("meow");
 makeResizable(meowScreen);
 
 dragElement(document.getElementById("meow"));
+
+addWindowTapHandling(meowScreen);
 
 document.getElementById("meowClose").addEventListener("click", function() {
     closeWindow(meowScreen);
