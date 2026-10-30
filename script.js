@@ -735,6 +735,7 @@ function createSuggestionCard(suggestionName, suggestion, suggestionCategory, su
     category.classList.add("category-other");
    }
    card.appendChild(category);
+   card.dataset.category = suggestionCategory;
 
    var description = document.createElement("span");
    description.textContent = suggestionDescription;
@@ -794,3 +795,51 @@ document.getElementById("meowClose").addEventListener("click", function() {
 document.getElementById("meowOpen").addEventListener("click", function() {
     openWindow(meowScreen);
 });
+
+var filterAllCategories = document.getElementById("filterAllCategories");
+var categoryCheckboxes = document.querySelectorAll('input[type="checkbox"][id^="filter"]:not(#filterAllCategories)');
+
+function updateCheckboxes() {
+    categoryCheckboxes.forEach(function(checkbox) {
+        checkbox.disabled = filterAllCategories.checked;
+        if (filterAllCategories.checked === true) {
+            checkbox.checked = false
+        }
+    });
+}
+filterAllCategories.addEventListener("change", function() {
+    updateCheckboxes();
+});
+
+updateCheckboxes();
+
+// document.getElementById("applyfilters").addEventListener("click", function() {
+//     var suggestionCards = document.querySelectorAll(".suggestion-card");
+
+//     if (filterAllCategories.checked === true) {
+//         suggestionCards.forEach(function(card) {
+//             card.style.display = "";
+//         });
+//     // } else if ([NO FILTERS ARE SELECTED (idk how to add that)]) {
+//         suggestionCards.forEach(function(card) {
+//             card.style.display = "none";
+//         });
+//         var suggestionList = document.getElementById("suggestionList");
+//         suggestionList = document.createElement("strong");
+//         suggestionList.textContent = "No Category Selected. Please Select a Category to View Results"
+//     } else {
+//         var selectedCategories = Array.from(categoryCheckboxes).filter(function(checkbox) {
+//             return checkbox.checked === true;
+//         }).map(function(checkbox) {
+//             return checkbox.value;
+//         });
+
+//         suggestionCards.forEach(function(card) {
+//             if (selectedCategories.includes(card.dataset.category)) {
+//                 card.style.display = "";
+//             } else {
+//                 card.style.display = "none";
+//             }
+//         });
+//     }
+// });

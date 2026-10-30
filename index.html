@@ -243,42 +243,52 @@
           <div id="whomade">
             Filter by who made the suggestion:
             <select>
-              <option>All</option>
-              <option>Made by you</option>
-              <option>Not made by you</option>
+              <option value="All">All</option>
+              <option value="Made by you">Made by you</option>
+              <option value="Not made by you">Not made by you</option>
             </select>
             <br>
             <em>This feature is in the works!</em>
             <hr>
           </div>
-          <div id="categoryfilter">
-            Filter by category: 
-            <label>
-              <input type="checkbox">
-              App Idea
-            </label>
+          <div id="categoryfilter" style="display: flex; justify-content: space-between;">
+            <div>
+              Filter by category: 
 
-            <label>
-              <input type="checkbox">
-              New Feature
-            </label>
+              <label>
+                <input type="checkbox" value="All" id="filterAllCategories" checked>
+                All categories
+              </label>
 
-            <label>
-              <input type="checkbox">
-              UI improvement/change
-            </label>
+              <label>
+                <input type="checkbox" value="App idea" id="filterAppIdea">
+                App idea
+              </label>
 
-            <label>
-              <input type="checkbox">
-              Bug Fix
-            </label>
+              <label>
+                <input type="checkbox" value="New feature" id="filterNewFeature">
+                New feature
+              </label>
 
-            <label>
-              <input type="checkbox">
-              Other
-            </label>
-            <br>
-            <em>This feature is in the works!</em>
+              <label>
+                <input type="checkbox" value="UI improvement/change" id="filterUIChange">
+                UI improvement/change
+              </label>
+
+              <label>
+                <input type="checkbox" value="Bug fix" id="filterBugFix">
+                Bug fix
+              </label>
+
+              <label>
+                <input type="checkbox" value="Other" id="filterOther">
+                Other
+              </label>
+            </div>
+
+            <button id="applyfilters" class="apply-filters">
+              <strong>Apply Filters</strong>
+            </button>
           </div>
           <hr style="height: 2px; border: none; background: #111;">
         </div>
@@ -348,9 +358,9 @@
       </div>
       <div class="windowcontent" style="padding: 15px 20px;">
         mrrrrrrrpp
-
+        <br><br>
         meeeeoooowwwwww
-
+        <br><br>
         mroamw mrrp
       </div>
     </div>
