@@ -5,22 +5,6 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_PUBLISHABLE_KEY
 );
 
-// async function testSupabaseConnection() {
-//     const { data, error } = await supabaseClient
-//         .from("suggestions")
-//         .select("*");
-
-//     if (error) {
-//         console.error("Supabase error:", error.message);
-//         return;
-//     }
-
-//     console.log("Connection successful!");
-//     console.log(data);
-// }
-
-// testSupabaseConnection();
-
 async function loadSuggestions() {
     const { data, error } = await supabaseClient
         .from("suggestions")
@@ -35,7 +19,13 @@ async function loadSuggestions() {
     document.getElementById("suggestionList").innerHTML = "";
 
     for (var item of data) {
-        createSuggestionCard(item.name, item.title, item.category, item.description)
+        createSuggestionCard(
+            item.name,
+            item.title,
+            item.category,
+            item.description,
+            item.user_id
+        );
     }
 }
 
@@ -708,7 +698,7 @@ userNotesInput.addEventListener("keyup", updateSelection);
 userNotesInput.addEventListener("input", updateSelection);
 userNotesInput.addEventListener("click", updateSelection);
 
-function createSuggestionCard(suggestionName, suggestion, suggestionCategory, suggestionDescription) {
+function createSuggestionCard(suggestionName, suggestion, suggestionCategory, suggestionDescription, suggestionUserId) {
     var card = document.createElement("div");
    card.classList.add("suggestion-card");
 
@@ -736,6 +726,8 @@ function createSuggestionCard(suggestionName, suggestion, suggestionCategory, su
    }
    card.appendChild(category);
    card.dataset.category = suggestionCategory;
+
+   card.dataset.userId = suggestionUserId;
 
    var description = document.createElement("span");
    description.textContent = suggestionDescription;
@@ -775,7 +767,8 @@ form.addEventListener("submit", async function(event) {
         suggestionName,
         suggestion,
         suggestionCategory,
-        suggestionDescription
+        suggestionDescription,
+        userId
     );
 
     form.reset()
