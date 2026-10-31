@@ -813,33 +813,36 @@ filterAllCategories.addEventListener("change", function() {
 
 updateCheckboxes();
 
-// document.getElementById("applyfilters").addEventListener("click", function() {
-//     var suggestionCards = document.querySelectorAll(".suggestion-card");
+document.getElementById("applyfilters").addEventListener("click", function() {
+    document.getElementById("noCategoryMessage").style.display = "none";
+    
+    var suggestionCards = document.querySelectorAll(".suggestion-card");
 
-//     if (filterAllCategories.checked === true) {
-//         suggestionCards.forEach(function(card) {
-//             card.style.display = "";
-//         });
-//     // } else if ([NO FILTERS ARE SELECTED (idk how to add that)]) {
-//         suggestionCards.forEach(function(card) {
-//             card.style.display = "none";
-//         });
-//         var suggestionList = document.getElementById("suggestionList");
-//         suggestionList = document.createElement("strong");
-//         suggestionList.textContent = "No Category Selected. Please Select a Category to View Results"
-//     } else {
-//         var selectedCategories = Array.from(categoryCheckboxes).filter(function(checkbox) {
-//             return checkbox.checked === true;
-//         }).map(function(checkbox) {
-//             return checkbox.value;
-//         });
+    var selectedCategories = Array.from(categoryCheckboxes).filter(function(checkbox) {
+        return checkbox.checked === true;
+    }).map(function(checkbox) {
+        return checkbox.value;
+    });
 
-//         suggestionCards.forEach(function(card) {
-//             if (selectedCategories.includes(card.dataset.category)) {
-//                 card.style.display = "";
-//             } else {
-//                 card.style.display = "none";
-//             }
-//         });
-//     }
-// });
+    if (filterAllCategories.checked === true) {
+        suggestionCards.forEach(function(card) {
+            card.style.display = "";
+        });
+
+    } else if (selectedCategories.length === 0) {
+        suggestionCards.forEach(function(card) {
+            card.style.display = "none";
+        });
+        document.getElementById("noCategoryMessage").style.display = "";
+
+    } else {
+
+        suggestionCards.forEach(function(card) {
+            if (selectedCategories.includes(card.dataset.category)) {
+                card.style.display = "";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+});
