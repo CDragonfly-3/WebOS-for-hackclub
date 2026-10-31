@@ -123,6 +123,7 @@ var notesMessage = document.getElementById("notesmessage");
 var welcomePagesToggle = document.getElementById("welcome-pages-toggle");
 var welcomePagesMenu = document.getElementById("welcome-pages-menu");
 var suggestionsScreen = document.getElementById("suggestions");
+var calcScreen = document.getElementById("calc");
 
 function setWelcomePagesOpen(isOpen) {
     welcomePagesToggle.setAttribute("aria-expanded", String(isOpen));
@@ -252,6 +253,10 @@ document.querySelector("#suggestionsOpen .app").addEventListener("click", functi
     if (suggestionsScreen.style.display !== "none") {
         loadSuggestions();
     }
+});
+
+document.querySelector("#calcopen .app").addEventListener("click", function() {
+    handleIconTap(this, calcScreen);
 });
 
 var content = [
@@ -808,6 +813,10 @@ updateCheckboxes();
 
 document.getElementById("applyfilters").addEventListener("click", function() {
     document.getElementById("noCategoryMessage").style.display = "none";
+
+    var authorFilter = document.getElementById("authorFilter");
+    var selectedAuthor = authorFilter.value;
+    var matchesAuthor;
     
     var suggestionCards = document.querySelectorAll(".suggestion-card");
 
@@ -817,21 +826,27 @@ document.getElementById("applyfilters").addEventListener("click", function() {
         return checkbox.value;
     });
 
-    if (filterAllCategories.checked === true) {
-        suggestionCards.forEach(function(card) {
-            card.style.display = "";
-        });
-
-    } else if (selectedCategories.length === 0) {
+    if (filterAllCategories.checked === false && selectedCategories.length === 0) {
         suggestionCards.forEach(function(card) {
             card.style.display = "none";
         });
+
         document.getElementById("noCategoryMessage").style.display = "";
 
     } else {
-
         suggestionCards.forEach(function(card) {
-            if (selectedCategories.includes(card.dataset.category)) {
+            if (selectedAuthor === "All") {
+                matchesAuthor = true;
+            } else if (selectedAuthor === "Made by you") {
+                matchesAuthor = card.dataset.userId === userId;
+            } else if (selectedAuthor === "Not made by you") {
+                matchesAuthor = card.dataset.userId !== userId;
+            }
+
+            var matchesCategory = filterAllCategories.checked ||
+                selectedCategories.includes(card.dataset.category);
+
+            if (matchesCategory && matchesAuthor) {
                 card.style.display = "";
             } else {
                 card.style.display = "none";
@@ -839,3 +854,15 @@ document.getElementById("applyfilters").addEventListener("click", function() {
         });
     }
 });
+
+
+document.getElementById("calcClose").addEventListener("click", function() {
+    closeWindow(calcScreen);
+    deselectIcon(document.querySelector("#calcOpen .app"));
+});
+
+makeResizable(calcScreen);
+
+dragElement(document.getElementById("calc"));
+
+addWindowTapHandling(calcScreen);

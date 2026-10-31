@@ -143,6 +143,13 @@
       </div>
     </div>
 
+    <div id="calcOpen" style="padding: 16px; width: 72px;">
+      <div class="app" title="Short for calculator btw">
+        <img src="./images/calc.png" alt="Calculator icon" style="width: 64px; height: 64px;">
+        <p style="text-align: center;">Calc</p>
+      </div>
+    </div>
+
     <div class="window" style="height: 450px; top: 150px; left: 150px; display: none" id="notes">
       <div id="top">
         <div class="windowheader" id="notesheader">
@@ -220,7 +227,7 @@
       </div>
     </div>
 
-    <div class="window" style="height: 450px; top: 150px; left: 150px;" id="suggestions">
+    <div class="window" style="height: 450px; top: 150px; left: 150px; display: none;" id="suggestions">
       <div id="top">
         <div id="suggestionsheader" class="windowheader">
           <span>Suggestions</span>
@@ -242,13 +249,11 @@
         <div id="suggestionfilters">
           <div id="whomade">
             Filter by who made the suggestion:
-            <select>
+            <select id="authorFilter">
               <option value="All">All</option>
               <option value="Made by you">Made by you</option>
               <option value="Not made by you">Not made by you</option>
             </select>
-            <br>
-            <em>This feature is in the works!</em>
             <hr>
           </div>
           <div id="categoryfilter" style="display: flex; justify-content: space-between;">
@@ -367,6 +372,16 @@
         meeeeoooowwwwww
         <br><br>
         mroamw mrrp
+      </div>
+    </div>
+
+    <div class="window" style="height: 450px; width: 600px; top: 200px; left: 200px; " id="calc">
+      <div id="top">
+        <div id="calcheader" class="windowheader">
+          <span>Calculator</span>
+
+          <span style="cursor: pointer;" id="calcClose">X</span>
+        </div>
       </div>
     </div>
     
