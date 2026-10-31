@@ -143,7 +143,7 @@
       </div>
     </div>
 
-    <div id="calcOpen" style="padding: 16px; width: 72px;">
+    <div id="calcopen" style="padding: 16px; width: 72px;">
       <div class="app" title="Short for calculator btw">
         <img src="./images/calc.png" alt="Calculator icon" style="width: 64px; height: 64px;">
         <p style="text-align: center;">Calc</p>
@@ -375,13 +375,39 @@
       </div>
     </div>
 
-    <div class="window" style="height: 450px; width: 600px; top: 200px; left: 200px; " id="calc">
+    <div class="window" style="display:none; height:450px; width:600px; top:200px; left:200px;" id="calc">
       <div id="top">
         <div id="calcheader" class="windowheader">
           <span>Calculator</span>
-
-          <span style="cursor: pointer;" id="calcClose">X</span>
+          <span style="cursor:pointer;" id="calcClose">X</span>
         </div>
+      </div>
+
+      <div id="calcDisplay">0</div>
+
+      <div id="calcButtons">
+        <button data-action="clear">C</button>
+        <button data-action="backspace">⌫</button>
+        <button data-operator="/">÷</button>
+        <button data-operator="*">×</button>
+
+        <button data-number="7">7</button>
+        <button data-number="8">8</button>
+        <button data-number="9">9</button>
+        <button data-operator="-">−</button>
+
+        <button data-number="4">4</button>
+        <button data-number="5">5</button>
+        <button data-number="6">6</button>
+        <button data-operator="+">+</button>
+
+        <button data-number="1">1</button>
+        <button data-number="2">2</button>
+        <button data-number="3">3</button>
+        <button data-action="equals">=</button>
+
+        <button data-number="0">0</button>
+        <button data-action="decimal">.</button>
       </div>
     </div>
     

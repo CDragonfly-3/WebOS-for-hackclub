@@ -196,6 +196,12 @@ document.getElementById("suggestionsClose").addEventListener("click", function()
     deselectIcon(document.querySelector("#suggestionsOpen .app"));
 });
 
+//calculator
+document.getElementById("calcClose").addEventListener("click", function() {
+    closeWindow(calcScreen);
+    deselectIcon(document.querySelector("#calcOpen .app"));
+});
+
 var selectedIcon = undefined
 
 function selectIcon(element) {
@@ -855,14 +861,90 @@ document.getElementById("applyfilters").addEventListener("click", function() {
     }
 });
 
-
-document.getElementById("calcClose").addEventListener("click", function() {
-    closeWindow(calcScreen);
-    deselectIcon(document.querySelector("#calcOpen .app"));
-});
-
 makeResizable(calcScreen);
 
 dragElement(document.getElementById("calc"));
 
 addWindowTapHandling(calcScreen);
+
+var calcDisplay = document.getElementById("calcDisplay");
+var calcButtons = document.getElementById("calcButtons");
+
+var currentNumber = "0";
+var previousNumber = null;
+var currentOperator = null;
+var shouldResetDisplay = false;
+
+function updateCalcDisplay() {
+    calcDisplay.textContent = currentNumber;
+}
+
+calcButtons.addEventListener("click", function(event) {
+    var button = event.target;
+
+    if (button.dataset.number !== undefined) {
+        if (currentNumber === "0" || shouldResetDisplay) {
+            currentNumber = button.dataset.number;
+            shouldResetDisplay = false;
+        } else {
+            currentNumber += button.dataset.number;
+        }
+    }
+
+    else if (button.dataset.operator) {
+        previousNumber = Number(currentNumber);
+        currentOperator = button.dataset.operator;
+        shouldResetDisplay = true;
+    }
+
+    else if (button.dataset.action === "decimal") {
+        if (shouldResetDisplay) {
+            currentNumber = "0";
+            shouldResetDisplay = false;
+        }
+
+        if (!currentNumber.includes(".")) {
+            currentNumber += ".";
+        }
+    }
+
+    else if (button.dataset.action === "clear") {
+        currentNumber = "0";
+        previousNumber = null;
+        currentOperator = null;
+        shouldResetDisplay = false;
+    }
+
+    else if (button.dataset.action === "backspace") {
+        if (shouldResetDisplay) {
+            currentNumber = "0";
+            shouldResetDisplay = false;
+        } else {
+            currentNumber = currentNumber.slice(0, -1) || "0";
+        }
+    }
+
+    else if (button.dataset.action === "equals") {
+        if (currentOperator !== null && previousNumber !== null) {
+            var secondNumber = Number(currentNumber);
+            var result;
+
+            if (currentOperator === "+") {
+                result = previousNumber + secondNumber;
+            } else if (currentOperator === "-") {
+                result = previousNumber - secondNumber;
+            } else if (currentOperator === "*") {
+                result = previousNumber * secondNumber;
+            } else if (currentOperator === "/") {
+                result = secondNumber === 0 ? "Error" : previousNumber / secondNumber;
+            }
+
+            currentNumber = String(result);
+            previousNumber = null;
+            currentOperator = null;
+            shouldResetDisplay = true;
+        }
+    }
+
+    updateCalcDisplay();
+});
