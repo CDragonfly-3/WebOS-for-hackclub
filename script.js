@@ -948,3 +948,21 @@ calcButtons.addEventListener("click", function(event) {
 
     updateCalcDisplay();
 });
+
+var backgroundVideo = document.getElementById("backgroundVideo");
+
+document.addEventListener("keydown", function(event) {
+    if (event.ctrlKey && event.altKey && event.shiftKey && event.key.toLowerCase() === "p") {
+        if (backgroundVideo.paused) {
+            backgroundVideo.play();
+        } else {
+            backgroundVideo.pause();
+        }
+    }
+});
+
+var noticeScreen = document.getElementById("noticeScreen");
+
+document.getElementById("closenotice").addEventListener("click", function() {
+    closeWindow(noticeScreen);
+});

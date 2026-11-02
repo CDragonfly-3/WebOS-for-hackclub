@@ -15,9 +15,7 @@
       body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background-image: url('./images/coolgif.gif');
         background-attachment: fixed;
-        background-size: cover;
         box-sizing: border-box;
         height: 100vh;
       }
@@ -39,6 +37,10 @@
   </head>
 
   <body>
+    <video id="backgroundVideo" autoplay muted loop>
+      <source src="./images/coolgif.mp4" type="video/mp4">
+    </video>
+
     <div id="welcome" class="window" style="top: 25px; left: 150px;"> <!--z-index: 1; AHH PLEASE NOTICE THIS PUT IT BACK PLEASE-->
 
       <div id="top">
@@ -351,10 +353,9 @@
       </div>
     </div>
 
-    <div id="meowOpen" style="padding: 16px; position: absolute; bottom: 25px; right: 0px;">
+    <div id="meowOpen" style="padding: 16px; position: absolute; bottom: 25px; right: -25px;">
       <div class="app" title="Mrrp Meow" style="width: 32px">
         <img src="./images/Unknown.png" alt="?" style="width: 32px; height: 32px;">
-        <p style="text-align: center; font-size: 10px">Mrrp<br>Meow</p>
       </div>
     </div>
 
@@ -409,6 +410,11 @@
         <button data-number="0">0</button>
         <button data-action="decimal">.</button>
       </div>
+    </div>
+
+    <div class="window" style="height: 100px; width: 150px; top: 50%; left: 50%; padding: 20px; transform: translate(-50%, -50%);" id="noticeScreen">
+      <strong id="closenotice" style="cursor: pointer; color: red; font-weight: 1000px;">Close Notice</strong><br><br><br>
+      Press ctrl+alt+shift+p to pause the background<br><br>(I know people have been complaining about this so that's why I added this)
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
